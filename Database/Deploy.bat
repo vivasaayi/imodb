@@ -1,3 +1,3 @@
-rh -dt postgres -d StoreFront
+rh -d imodb
 
 pause

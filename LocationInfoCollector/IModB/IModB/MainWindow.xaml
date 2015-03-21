@@ -1,0 +1,12 @@
+﻿<Window x:Class="IModB.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="388.158" Width="605.263">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="186*"/>
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
+
+    </Grid>
+</Window>

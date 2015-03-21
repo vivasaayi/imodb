@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IModB", "IModB\IModB.csproj", "{1407D89D-757A-4C52-AE81-785380054702}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IModB.UI", "IModB.UI\IModB.UI.csproj", "{0584697F-C706-4DB0-85F7-3EA994DCF218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IModBLocationInfoCollector", "IModBLocationInfoCollector\IModBLocationInfoCollector.csproj", "{EA82B593-0B70-4ED5-8119-32A3D2E2EF0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1407D89D-757A-4C52-AE81-785380054702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1407D89D-757A-4C52-AE81-785380054702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1407D89D-757A-4C52-AE81-785380054702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1407D89D-757A-4C52-AE81-785380054702}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0584697F-C706-4DB0-85F7-3EA994DCF218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0584697F-C706-4DB0-85F7-3EA994DCF218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0584697F-C706-4DB0-85F7-3EA994DCF218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0584697F-C706-4DB0-85F7-3EA994DCF218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA82B593-0B70-4ED5-8119-32A3D2E2EF0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA82B593-0B70-4ED5-8119-32A3D2E2EF0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA82B593-0B70-4ED5-8119-32A3D2E2EF0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA82B593-0B70-4ED5-8119-32A3D2E2EF0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
