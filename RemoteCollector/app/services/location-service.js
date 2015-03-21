@@ -14,4 +14,8 @@ LocationService.prototype.updateLocation = function (locationInfo, callback) {
   this.saveDocument("location", locationInfo, "testuser", callback);
 };
 
+LocationService.prototype.getRecentEntries = function (callback) {
+  this.getRecentFromCollection("location", callback);
+};
+
 module.exports = LocationService;

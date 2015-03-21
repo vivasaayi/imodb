@@ -23,4 +23,14 @@ LocationController.prototype.updateLocation = function (req, res) {
   });
 };
 
+LocationController.prototype.getRecentEntries = function (req, res) {  
+  locationService.getRecentEntries(function (err, result) {
+    if (err) {
+      res.send({ error: "error", message: result.message });
+    } else {
+      res.send({ status: "Success", result: result });
+    }
+  });
+};
+
 module.exports = LocationController;

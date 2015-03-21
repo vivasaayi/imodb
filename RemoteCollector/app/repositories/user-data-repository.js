@@ -16,3 +16,12 @@ module.exports.save = function (collectionName, document, callback) {
     });
   }
 };
+
+
+module.exports.loadWithLimit = function (collectionName, limit, callback) {
+  console.log("Loading " + collectionName);
+
+  database.getTopXFromCollection(collectionName, limit, function (err, result) {
+    callback(err, result);
+  });
+};

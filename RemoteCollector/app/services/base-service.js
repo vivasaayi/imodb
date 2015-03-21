@@ -29,4 +29,8 @@ BaseService.prototype.updateBaseFields = function (object, userId) {
   object.updatedOn = moment().valueOf();
 };
 
+BaseService.prototype.getRecentFromCollection = function (collection, callback) {
+  userDataRepository.loadWithLimit(collection, 100, _.partial(this.invokeCallBack, callback));
+};
+
 module.exports = BaseService;
