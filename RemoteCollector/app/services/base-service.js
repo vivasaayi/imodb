@@ -30,7 +30,11 @@ BaseService.prototype.updateBaseFields = function (object, userId) {
 };
 
 BaseService.prototype.getRecentFromCollection = function (collection, callback) {
-  userDataRepository.loadWithLimit(collection, 100, _.partial(this.invokeCallBack, callback));
+  userDataRepository.loadWithLimit(collection, 5, _.partial(this.invokeCallBack, callback));
+};
+
+BaseService.prototype.deleteDocument = function (collection, document, callback) {
+  userDataRepository.delete(collection, document, callback);
 };
 
 module.exports = BaseService;

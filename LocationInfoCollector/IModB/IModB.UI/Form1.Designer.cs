@@ -34,10 +34,11 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.room2 = new IModB.UI.Room();
-            this.room1 = new IModB.UI.Room();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.room2 = new IModB.UI.Room();
+            this.room1 = new IModB.UI.Room();
+            this.fetchDataButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -113,22 +114,6 @@
             this.tabPage2.Text = "Data Transferred";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // room2
-            // 
-            this.room2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.room2.Location = new System.Drawing.Point(12, 218);
-            this.room2.Name = "room2";
-            this.room2.Size = new System.Drawing.Size(350, 200);
-            this.room2.TabIndex = 4;
-            // 
-            // room1
-            // 
-            this.room1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.room1.Location = new System.Drawing.Point(12, 12);
-            this.room1.Name = "room1";
-            this.room1.Size = new System.Drawing.Size(350, 200);
-            this.room1.TabIndex = 3;
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.richTextBox2);
@@ -149,11 +134,38 @@
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             // 
+            // room2
+            // 
+            this.room2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.room2.Location = new System.Drawing.Point(12, 218);
+            this.room2.Name = "room2";
+            this.room2.Size = new System.Drawing.Size(350, 200);
+            this.room2.TabIndex = 4;
+            // 
+            // room1
+            // 
+            this.room1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.room1.Location = new System.Drawing.Point(12, 12);
+            this.room1.Name = "room1";
+            this.room1.Size = new System.Drawing.Size(350, 200);
+            this.room1.TabIndex = 3;
+            // 
+            // fetchDataButton
+            // 
+            this.fetchDataButton.Location = new System.Drawing.Point(489, 13);
+            this.fetchDataButton.Name = "fetchDataButton";
+            this.fetchDataButton.Size = new System.Drawing.Size(112, 23);
+            this.fetchDataButton.TabIndex = 6;
+            this.fetchDataButton.Text = "Fetch Latest Data";
+            this.fetchDataButton.UseVisualStyleBackColor = true;
+            this.fetchDataButton.Click += new System.EventHandler(this.fetchDataButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(654, 428);
+            this.Controls.Add(this.fetchDataButton);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.room2);
             this.Controls.Add(this.room1);
@@ -182,6 +194,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Button fetchDataButton;
     }
 }
 

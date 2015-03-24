@@ -26,6 +26,7 @@ app.get('/location', function (req, res) {
 
 app.post('/location', locationController.updateLocation);
 app.get('/location/recent', locationController.getRecentEntries);
+app.get('/location/deleteDocuments/:documentId', locationController.deleteDocuments)
 
 console.log("Starting Mongo..");
 

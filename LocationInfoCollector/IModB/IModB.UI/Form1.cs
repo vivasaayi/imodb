@@ -107,5 +107,10 @@ namespace IModB.UI
                 room.HighLight(readerId, deviceId);
             }
         }
+
+        private void fetchDataButton_Click(object sender, EventArgs e)
+        {
+            new NetworkHelper().GetRecenteData();
+        }
     }
 }

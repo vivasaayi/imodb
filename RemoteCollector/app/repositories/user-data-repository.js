@@ -25,3 +25,14 @@ module.exports.loadWithLimit = function (collectionName, limit, callback) {
     callback(err, result);
   });
 };
+
+
+module.exports.delete = function (collectionName, document, callback) {
+  console.log("Deleting");
+  
+  if (document._id) {
+    database.deleteDocument(collectionName, document, function (err, result) {
+      callback(err, result);
+    });
+  }
+};

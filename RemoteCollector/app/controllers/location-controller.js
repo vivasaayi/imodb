@@ -36,4 +36,17 @@ LocationController.prototype.getRecentEntries = function (req, res) {
   });
 };
 
+LocationController.prototype.deleteDocuments = function (req, res) {
+  var id = req.params.documentId;
+
+  locationService.deleteDocuments(id, function (err, result) {
+    if (err) {
+      res.send({ error: "error", message: err });
+    } else {
+      res.send({ status: "Success", result: result });
+    }
+  });
+};
+
+
 module.exports = LocationController;
