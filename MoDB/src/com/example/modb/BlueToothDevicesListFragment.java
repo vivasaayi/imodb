@@ -2,6 +2,8 @@ package com.example.modb;
 
 import java.util.Set;
 
+import org.json.JSONObject;
+
 import android.app.ActionBar;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -26,6 +28,7 @@ import android.widget.TextView;
 public class BlueToothDevicesListFragment extends Fragment {
 	BluetoothAdapter blueToothAdapter;
 	View view;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

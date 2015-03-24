@@ -28,6 +28,7 @@ app.post('/location', locationController.updateLocation);
 app.get('/location/recent', locationController.getRecentEntries);
 
 console.log("Starting Mongo..");
+
 databaseHelper.startMongo(appConfig.db, function (err, db) {
   if (err) {
     console.log("Error Starting Mongo..");

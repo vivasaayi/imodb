@@ -36,9 +36,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Name = "Room";
-            this.Size = new System.Drawing.Size(175, 208);
+            this.Size = new System.Drawing.Size(350, 200);
             this.Load += new System.EventHandler(this.Room_Load);
             this.Click += new System.EventHandler(this.Room_Click);
+            this.DoubleClick += new System.EventHandler(this.Room_DoubleClick);
             this.ResumeLayout(false);
 
         }

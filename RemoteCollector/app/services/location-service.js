@@ -11,7 +11,11 @@ var LocationService = function () {
 util.inherits(LocationService, BaseService);
 
 LocationService.prototype.updateLocation = function (locationInfo, callback) {
-  this.saveDocument("location", locationInfo, "testuser", callback);
+  var doc = {
+    time: new Date(),
+    data: locationInfo
+  };
+  this.saveDocument("location", doc, "testuser", callback);
 };
 
 LocationService.prototype.getRecentEntries = function (callback) {
