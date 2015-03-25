@@ -1,6 +1,6 @@
 {
-  "name": "OrphMan",
-  "description": "Orphanage Manager",
+  "name": "IMODB",
+  "description": "Indoor Moving Object Database",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
