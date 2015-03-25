@@ -1,2 +1,0 @@
-E:\Projects\imodb\RemoteCollector\bin\Microsoft.NodejsTools.WebRole.dll
-E:\Projects\imodb\RemoteCollector\obj\Debug\ImodB.njsprojResolveAssemblyReference.cache
