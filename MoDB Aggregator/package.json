@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "body-parser": "^1.9.3",
+    "dal": "git://github.com/vivasaayi/dal",
     "debug": "0.7.2",
     "express": "4.10.4",
     "mime": "1.2.11",
