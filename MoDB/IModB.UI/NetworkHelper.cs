@@ -13,11 +13,14 @@ namespace IModB.UI
 {
     public class NetworkHelper
     {
-        string baseUrl = "http://localhost:1853/";
+        private string GetBaseUrl()
+        {
+            return IMoDBSettings.URL + ":" + IMoDBSettings.Port + "/";
+        }
 
         public void PostData(string data)
         {
-            var url = baseUrl + "location/";
+            var url = GetBaseUrl() + "location/";
 
             //url = "http://localhost:1853/home/about";
 
@@ -42,7 +45,7 @@ namespace IModB.UI
 
         public void GetRecenteData()
         {
-            var url = this.baseUrl + "location/recent";
+            var url = this.GetBaseUrl() + "location/recent";
 
             //url = "http://localhost:4142/home/about";
 
@@ -71,8 +74,8 @@ namespace IModB.UI
                     {
                         var locationInfo = data[j];
 
-                        var deviceId = new Guid(locationInfo["DeviceId"].Value<string>());
-                        var readerId = new Guid(locationInfo["ReaderId"].Value<string>());
+                        var deviceId = locationInfo["DeviceId"].Value<string>();
+                        var readerId = locationInfo["ReaderId"].Value<string>();
                         var distance = locationInfo["Distance"].Value<Decimal>();
                         var time = locationInfo["TimeStamp"].Value<DateTime>();
 
@@ -130,8 +133,8 @@ namespace IModB.UI
 
     public class LocationInfo
     {
-        public Guid DeviceId { get; set; }
-        public Guid ReaderId { get; set; }
+        public string DeviceId { get; set; }
+        public string ReaderId { get; set; }
         public decimal Distance { get; set; }
         public DateTime TimeStamp { get; set; }
     }

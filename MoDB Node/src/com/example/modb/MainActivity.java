@@ -1,56 +1,31 @@
 package com.example.modb;
 
-import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
 import android.app.Activity;
-import android.app.FragmentTransaction;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
-import android.widget.TextView;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
-@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-public class MainActivity extends FragmentActivity implements TabListener {
-	private ViewPager viewPager;
-    private TabsPageAdapter tabPagerAdapter;
-    private ActionBar actionBar;
-    // Tab titles
-    private String[] tabs = { "BlueTooth Devices", "Wifi Devices", "Other" };
-	
+public class MainActivity extends Activity implements OnClickListener {
+
+	Button startAPButton;
+	Button callibrateButton;
+	Button trackMeButton;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
-        tabPagerAdapter = new TabsPageAdapter(getSupportFragmentManager());
- 
-        viewPager.setAdapter(tabPagerAdapter);
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
- 
-        // Adding Tabs
-        for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name)
-                    .setTabListener(this));
-        }
+
+		startAPButton = (Button) findViewById(R.id.startAP);
+		callibrateButton = (Button) findViewById(R.id.startCallibrator);
+		trackMeButton = (Button) findViewById(R.id.trackMe);
+
+		startAPButton.setOnClickListener(this);
+		callibrateButton.setOnClickListener(this);
+		trackMeButton.setOnClickListener(this);
 	}
 
 	@Override
@@ -61,21 +36,16 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	}
 
 	@Override
-	public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		
+	public void onClick(View view) {
+		if (view == startAPButton) {
+			Intent intent = new Intent(MainActivity.this, BlueToothAPActivity.class);
+			startActivity(intent);
+		} else if (view == callibrateButton) {
+			Intent intent = new Intent(MainActivity.this, BlueToothCallibratorActivity.class);
+			startActivity(intent);
+		} else if (view == trackMeButton) {
+			Intent intent = new Intent(MainActivity.this, BlueToothTrackerActivity.class);
+			startActivity(intent);
+		}
 	}
-
-	@Override
-	public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

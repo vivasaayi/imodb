@@ -18,14 +18,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class WifiDevicesListFragment extends Fragment {
+public class CopyOfBlueToothCallibratorActivity extends Fragment {
 	WifiManager wifi; 
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
-        View rootView = inflater.inflate(R.layout.wifi_devices, container, false);
+        View rootView = inflater.inflate(R.layout.callibrator, container, false);
         
         wifi = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
         

@@ -24,6 +24,9 @@ namespace IModB.UI
 
             room1.OnReaderSelected += room1_OnReaderSelected;
             room2.OnReaderSelected += room2_OnReaderSelected;
+
+            textBox1.Text = IMoDBSettings.URL;
+            textBox2.Text = IMoDBSettings.Port.ToString();
         }
 
         void room2_OnReaderSelected(Reader reader)
@@ -111,6 +114,21 @@ namespace IModB.UI
         private void fetchDataButton_Click(object sender, EventArgs e)
         {
             new NetworkHelper().GetRecenteData();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            IMoDBSettings.URL = textBox1.Text;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            int port;
+
+            if (int.TryParse(textBox2.Text, out port))
+            {
+                IMoDBSettings.Port = port;
+            }
         }
     }
 }
