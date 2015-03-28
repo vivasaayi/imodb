@@ -32,6 +32,7 @@
         <activity android:name="BlueToothAPActivity"></activity>
         <activity android:name="BlueToothCallibratorActivity"></activity>
         <activity android:name="BlueToothTrackerActivity"></activity>
+        <activity android:name="PreferenceEditorActivity"></activity>
     </application>
 
 </manifest>

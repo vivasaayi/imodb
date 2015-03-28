@@ -10,7 +10,7 @@
         android:text="@string/StartAP" />
 
     <Button
-        android:id="@+id/startCallibrator"
+        android:id="@+id/callibrate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/StartCallibrator" />
@@ -20,5 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/trackMe" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Preference" />
 
 </LinearLayout>

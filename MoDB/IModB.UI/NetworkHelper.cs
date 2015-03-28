@@ -95,7 +95,7 @@ namespace IModB.UI
             UpdateLocationsInDB(locationInfoList);
         }
 
-        string _connectionString = "Server=localhost;Database=test;Trusted_Connection=True";
+        string _connectionString = "Server=localhost;Database=imodb;Trusted_Connection=True";
 
         public void UpdateProcessedDocuments(string documentId, string details)
         {
@@ -105,8 +105,8 @@ namespace IModB.UI
         public void UpdateLocationsInDB(List<LocationInfo> locationInfo)
         {
             var table = new DataTable();
-            table.Columns.Add(new DataColumn("DeviceId", typeof(Guid)));
-            table.Columns.Add(new DataColumn("ReaderId", typeof(Guid)));
+            table.Columns.Add(new DataColumn("DeviceId", typeof(string)));
+            table.Columns.Add(new DataColumn("ReaderId", typeof(string)));
             table.Columns.Add(new DataColumn("Timestamp", typeof(DateTime)));
             table.Columns.Add(new DataColumn("Distance", typeof(decimal)));
 

@@ -10,5 +10,9 @@
     <string name="trackMe">Track Me</string>
     <string name="addDevice">Add Device</string>
     <string name="postScanResultToServer">Post Scan Result To Server</string>
+    <string name="savePreference">Save Preference</string>
+    <string name="enterURL">URL (Do not include / at the end)</string>
+    <string name="port">Port</string>
+    <string name="Preference">Settings</string>
 
 </resources>

@@ -24,6 +24,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -152,7 +153,11 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 			buffer.deleteCharAt(buffer.length()-1);
 			buffer.append("]");
 
-			String url = "http://10.135.50.195:4040/location";
+			SharedPreferences sharedpreferences = getSharedPreferences("MODB", Context.MODE_PRIVATE);
+			
+			String urlSetting = sharedpreferences.getString("URL", "");
+			String portSetting = sharedpreferences.getString("Port", "");
+			String url =  urlSetting + ":" + portSetting + "/location";
 			Toast.makeText(this, "Posting Scan Results to: " + url, Toast.LENGTH_LONG).show();
 			
 			new HttpPostTask().execute(url, buffer.toString());
@@ -246,7 +251,7 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 
 			} catch (Exception e) {
 				result = e.getMessage() + "-" + e.getStackTrace();
-				Toast.makeText(BlueToothAPActivity.this, result, Toast.LENGTH_LONG).show();
+				//Toast.makeText(BlueToothAPActivity.this, result, Toast.LENGTH_LONG).show();
 			}
 
 			return result;

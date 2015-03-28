@@ -6,8 +6,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[LocationInfo](
-	[DeviceId] [uniqueidentifier] NOT NULL,
-	[ReaderId] [uniqueidentifier] NOT NULL,
+	[DeviceId] [nvarchar](300) NOT NULL,
+	[ReaderId] [nvarchar](300) NOT NULL,
 	[TimeStamp] [datetime] NOT NULL,
 	[Distance] [decimal](18, 0) NOT NULL
 ) ON [PRIMARY]
