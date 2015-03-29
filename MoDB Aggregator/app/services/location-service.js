@@ -22,11 +22,8 @@ LocationService.prototype.getRecentEntries = function (callback) {
   this.getRecentFromCollection("location", callback);
 };
 
-LocationService.prototype.deleteDocuments = function (id, callback) {
-  var doc = {
-    _id: id
-  }
-  this.deleteDocument("location", doc, callback)
+LocationService.prototype.deleteLocationDocuments = function (ids, callback) {
+  this.deleteDocuments("location", ids, callback)
 };
 
 module.exports = LocationService;

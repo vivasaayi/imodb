@@ -19,14 +19,14 @@ LocationController.prototype.updateLocation = function (req, res) {
   
   locationService.updateLocation(locationInfo, function (err, result) {
     if (err) {
-      res.send({error: "error", message: err});
+      res.send({ error: "error", message: err });
     } else {
-      res.send({status: "Saved"});
+      res.send({ status: "Saved" });
     }
   });
 };
 
-LocationController.prototype.getRecentEntries = function (req, res) {  
+LocationController.prototype.getRecentEntries = function (req, res) {
   locationService.getRecentEntries(function (err, result) {
     if (err) {
       res.send({ error: "error", message: err });
@@ -37,13 +37,19 @@ LocationController.prototype.getRecentEntries = function (req, res) {
 };
 
 LocationController.prototype.deleteDocuments = function (req, res) {
-  var id = req.params.documentId;
-
-  locationService.deleteDocuments(id, function (err, result) {
+  var idsAsString = req.params.ids;
+  
+  if (idsAsString === null || idsAsString === undefined || idsAsString === "") {
+    return res.send({ error: "error", message: "Please specify the document ids." });
+  }
+  
+  var ids = idsAsString.split(",");
+  
+  locationService.deleteLocationDocuments(ids, function (err) {
     if (err) {
-      res.send({ error: "error", message: err });
+      res.send({ error: "error deleting documents", message: err });
     } else {
-      res.send({ status: "Success", result: result });
+      res.send({ status: "Success", result: "Documents deleted." });
     }
   });
 };

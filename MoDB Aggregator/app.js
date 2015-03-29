@@ -17,16 +17,9 @@ app.get('/', function (req, res) {
   res.send("Hello!");
 });
 
-app.get('/location', function (req, res) {
-  res.send("<html><body><form method='post' action='/location'>" +
-    "<input type='text'/><input type='text'/><input type='text'/>" +
-    "<input type='submit'/>" +
-    "</form></body></html>");
-});
-
 app.post('/location', locationController.updateLocation);
 app.get('/location/recent', locationController.getRecentEntries);
-app.get('/location/deleteDocuments/:documentId', locationController.deleteDocuments)
+app.delete('/location/:ids', locationController.deleteDocuments)
 
 console.log("Starting Mongo..");
 

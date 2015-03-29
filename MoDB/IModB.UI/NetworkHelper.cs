@@ -50,6 +50,33 @@ namespace IModB.UI
             }
         }
 
+        public void DeleteData(string ids)
+        {
+            try
+            {
+                var url = GetBaseUrl() + "location/" + ids;
+
+                //url = "http://localhost:1853/home/about";
+
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url); ;
+                request.Method = "DELETE";
+                
+                var response = request.GetResponse();
+
+                var resultdata = "";
+                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                {
+                    resultdata = sr.ReadToEnd();
+                }
+
+                Console.WriteLine(resultdata);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         public void GetRecenteData()
         {
             var url = this.GetBaseUrl() + "location/recent";
@@ -82,7 +109,7 @@ namespace IModB.UI
                         var locationInfo = data[j];
 
                         var deviceId = locationInfo["DeviceId"].Value<string>();
-                        var readerId = locationInfo["ReaderId"].Value<string>();
+                        var readerId = locationInfo["SensorId"].Value<string>();
                         var distance = locationInfo["Distance"].Value<Decimal>();
                         var time = locationInfo["TimeStamp"].Value<DateTime>();
 
@@ -100,6 +127,9 @@ namespace IModB.UI
                 
             }
             UpdateLocationsInDB(locationInfoList);
+            var docIdsToDeleteArray = docs.Keys.ToArray();
+
+            DeleteData(string.Join(",", docIdsToDeleteArray));
         }
 
         string _connectionString = "Server=localhost;Database=imodb;Trusted_Connection=True";
