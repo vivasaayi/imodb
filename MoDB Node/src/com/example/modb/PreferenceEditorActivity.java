@@ -18,6 +18,7 @@ public class PreferenceEditorActivity extends Activity implements OnClickListene
 
 	EditText urlEditView;
 	EditText portEditView;
+	EditText accessPointNameEditView;
 	SharedPreferences sharedpreferences;
 
 	@Override
@@ -30,10 +31,12 @@ public class PreferenceEditorActivity extends Activity implements OnClickListene
 
 		urlEditView = (EditText) findViewById(R.id.url);
 		portEditView = (EditText) findViewById(R.id.port);
+		accessPointNameEditView = (EditText) findViewById(R.id.accessPointNameTextView);
 
 		sharedpreferences = getSharedPreferences("MODB", Context.MODE_PRIVATE);
 		urlEditView.setText(sharedpreferences.getString("URL", ""));
 		portEditView.setText(sharedpreferences.getString("Port", ""));
+		accessPointNameEditView.setText(sharedpreferences.getString("APN", ""));
 	}
 
 	@Override
@@ -49,6 +52,7 @@ public class PreferenceEditorActivity extends Activity implements OnClickListene
 			Editor editor = sharedpreferences.edit();
 			editor.putString("URL", urlEditView.getText().toString());
 			editor.putString("Port", portEditView.getText().toString());
+			editor.putString("APN", accessPointNameEditView.getText().toString());
 
 			editor.commit();
 			

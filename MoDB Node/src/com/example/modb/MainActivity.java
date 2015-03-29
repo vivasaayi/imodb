@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			Editor editor = sharedpreferences.edit();
 			editor.putString("URL", "http://127.0.0.1");
 			editor.putString("Port", "4040");
+			editor.putString("APN", "Please set the APN");
 
 			editor.commit();
 		}

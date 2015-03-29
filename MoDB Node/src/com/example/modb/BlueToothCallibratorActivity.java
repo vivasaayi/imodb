@@ -18,4 +18,5 @@ public class BlueToothCallibratorActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+ 
 }

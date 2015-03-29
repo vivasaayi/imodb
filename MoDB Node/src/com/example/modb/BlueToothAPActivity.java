@@ -142,12 +142,15 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 	private void updateDeviceDetailsToRemoteServer() {
 		try {
 			StringBuffer buffer = new StringBuffer();
+			SharedPreferences sharedpreferences = getSharedPreferences("MODB", Context.MODE_PRIVATE);
+			
 			buffer.append("[");
 
 			for (BlueToothDevice device : scannedDevices) {
 				JSONObject child = new JSONObject();
-				child.accumulate("ReaderId", "My Reader Id");
+				child.accumulate("SensorId", sharedpreferences.getString("APN", ""));
 				child.accumulate("DeviceId", device.MacAddress);
+				child.accumulate("DeviceName", device.Name);
 				child.accumulate("Distance", device.Rssi);
 				child.accumulate("TimeStamp", device.Date);
 				
@@ -156,8 +159,6 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 
 			buffer.deleteCharAt(buffer.length()-1);
 			buffer.append("]");
-
-			SharedPreferences sharedpreferences = getSharedPreferences("MODB", Context.MODE_PRIVATE);
 			
 			String urlSetting = sharedpreferences.getString("URL", "");
 			String portSetting = sharedpreferences.getString("Port", "");

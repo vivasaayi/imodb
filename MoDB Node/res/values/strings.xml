@@ -14,5 +14,6 @@
     <string name="enterURL">URL (Do not include / at the end)</string>
     <string name="port">Port</string>
     <string name="Preference">Settings</string>
+    <string name="accessPointName">Access Point Name</string>
 
 </resources>

@@ -15,8 +15,15 @@ namespace IModB.UI.DomainModel
         [DataMember]
         public string DeviceId { get; set; }
         [DataMember]
+        public string DeviceName { get; set; }
+        [DataMember]
         public double Distance { get; set; }
         [DataMember]
         public DateTime TimeStamp { get; set; }
+
+        public ScanResult()
+        {
+            DeviceName = "DN";
+        }
     }
 }

@@ -109,14 +109,16 @@ namespace IModB.UI
                         var locationInfo = data[j];
 
                         var deviceId = locationInfo["DeviceId"].Value<string>();
-                        var readerId = locationInfo["SensorId"].Value<string>();
+                        var deviceName = locationInfo["DeviceName"].Value<string>();
+                        var sensorId = locationInfo["SensorId"].Value<string>();
                         var distance = locationInfo["Distance"].Value<Decimal>();
                         var time = locationInfo["TimeStamp"].Value<DateTime>();
 
                         var loc = new LocationInfo();
 
                         loc.DeviceId = deviceId;
-                        loc.ReaderId = readerId;
+                        loc.DeviceName = deviceName;
+                        loc.SensorId = sensorId;
                         loc.Distance = distance;
                         loc.TimeStamp = time;
 
@@ -143,7 +145,8 @@ namespace IModB.UI
         {
             var table = new DataTable();
             table.Columns.Add(new DataColumn("DeviceId", typeof(string)));
-            table.Columns.Add(new DataColumn("ReaderId", typeof(string)));
+            table.Columns.Add(new DataColumn("DeviceName", typeof(string)));
+            table.Columns.Add(new DataColumn("SensorId", typeof(string)));
             table.Columns.Add(new DataColumn("Timestamp", typeof(DateTime)));
             table.Columns.Add(new DataColumn("Distance", typeof(decimal)));
 
@@ -152,7 +155,8 @@ namespace IModB.UI
                 var row = table.NewRow();
 
                 row["DeviceId"] = loc.DeviceId;
-                row["ReaderId"] = loc.ReaderId;
+                row["DeviceName"] = loc.DeviceName;
+                row["SensorId"] = loc.SensorId;
                 row["TimeStamp"] = loc.TimeStamp;
                 row["Distance"] = loc.Distance;
 
@@ -171,8 +175,10 @@ namespace IModB.UI
     public class LocationInfo
     {
         public string DeviceId { get; set; }
-        public string ReaderId { get; set; }
+        public string SensorId { get; set; }
         public decimal Distance { get; set; }
         public DateTime TimeStamp { get; set; }
+
+        public string DeviceName { get; set; }
     }
 }

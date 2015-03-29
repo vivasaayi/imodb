@@ -38,7 +38,8 @@ namespace IModB.UI
             StringBuilder sb = new StringBuilder();
             foreach (var result in scanResults)
             {
-                sb.Append("\"ReaderId\":\"").Append(result.SensorId.ToString()).Append("\",")
+                sb.Append("\"SensorId\":\"").Append(result.SensorId.ToString()).Append("\",")
+                    .Append("\"DeviceName\":\"").Append(result.DeviceId.ToString()).Append("\",")
                     .Append("\"DeviceId\":\"").Append(result.DeviceId.ToString()).Append("\",")
                     .Append("\"TimeStamp\":\"").Append(result.TimeStamp).Append("\",")
                     .Append("\"Distance\":\"").Append(result.Distance).Append("\",");

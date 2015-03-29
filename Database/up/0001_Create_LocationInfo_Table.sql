@@ -7,7 +7,8 @@ GO
 
 CREATE TABLE [dbo].[LocationInfo](
 	[DeviceId] [nvarchar](300) NOT NULL,
-	[ReaderId] [nvarchar](300) NOT NULL,
+	[DeviceName] [nvarchar](300) NOT NULL,
+	[SensorId] [nvarchar](300) NOT NULL,
 	[TimeStamp] [datetime] NOT NULL,
 	[Distance] [decimal](18, 0) NOT NULL
 ) ON [PRIMARY]
