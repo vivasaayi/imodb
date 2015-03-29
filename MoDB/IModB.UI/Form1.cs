@@ -15,12 +15,9 @@ namespace IModB.UI
 {
     public partial class Form1 : Form
     {
-        List<BuildingUserControl> _rooms = new List<BuildingUserControl>();
-
         public Form1()
         {
             InitializeComponent();
-            _rooms.Add(buildingUserControl);
 
             textBox1.Text = IMoDBSettings.URL;
             textBox2.Text = IMoDBSettings.Port.ToString();
@@ -63,10 +60,9 @@ namespace IModB.UI
             var readerId = row.Cells[0].Value.ToString();
             var deviceId = row.Cells[1].Value.ToString();
 
-            foreach (var room in _rooms)
-            {
-                room.HighLight(readerId, deviceId);
-            }
+
+            buildingUserControl.HighLight(readerId, deviceId);
+
         }
 
         private void fetchDataButton_Click(object sender, EventArgs e)
