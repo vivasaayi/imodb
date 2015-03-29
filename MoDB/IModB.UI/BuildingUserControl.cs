@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using IModB.UI.UI;
 using IModB.UI.DomainModel;
 
 namespace IModB.UI
@@ -36,20 +35,6 @@ namespace IModB.UI
                 device.Draw(g);
             }
         }
-
-        //private void Room_DoubleClick(object sender, EventArgs e)
-        //{
-        //    var me = (MouseEventArgs)e;
-
-        //    var device = new Device();
-        //    device.Top = me.Y;
-        //    device.Left = me.X;
-        //    //_devices.Add(device);
-
-        //    //device.OnDeviceSelected += device_OnDeviceSelected;
-
-        //    Draw(this.CreateGraphics());
-        //}
 
         internal void HighLight(string sensorId, string deviceId)
         {

@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IModB.UI
+namespace IModB.UI.DomainModel
 {
     [DataContract]
     public class ScanResult

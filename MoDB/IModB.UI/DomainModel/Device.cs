@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IModB.UI.UI
+namespace IModB.UI.DomainModel
 {
     public delegate void DeviceSelected(Device device);
 

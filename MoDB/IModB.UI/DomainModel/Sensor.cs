@@ -29,7 +29,7 @@ namespace IModB.UI.DomainModel
             }
         }
 
-        internal IEnumerable<ScanResult> Scan(List<UI.Device> _devices)
+        internal IEnumerable<ScanResult> Scan(List<Device> _devices)
         {
             List<ScanResult> _scanResult = new List<ScanResult>();
 

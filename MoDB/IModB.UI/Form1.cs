@@ -20,27 +20,15 @@ namespace IModB.UI
         public Form1()
         {
             InitializeComponent();
-            _rooms.Add(room1);
-
-            //room1.OnReaderSelected += room1_OnReaderSelected;
+            _rooms.Add(buildingUserControl);
 
             textBox1.Text = IMoDBSettings.URL;
             textBox2.Text = IMoDBSettings.Port.ToString();
         }
 
-        void room2_OnReaderSelected(Reader reader)
-        {
-            //room1.reader_OnReaderSelected(reader);
-        }
-
-        void room1_OnReaderSelected(Reader reader)
-        {
-            //room2.reader_OnReaderSelected(reader);
-        }
-
         private void scanDevicesButton_Click(object sender, EventArgs e)
         {
-            List<ScanResult> scanResults = room1.getScanResult();
+            List<ScanResult> scanResults = buildingUserControl.getScanResult();
 
             DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(List<ScanResult>));
             MemoryStream ms = new MemoryStream();
@@ -110,7 +98,7 @@ namespace IModB.UI
         {
             var building = new Building();
             building.Initialize();
-            room1.LoadData(building);
+            buildingUserControl.LoadData(building);
         }
     }
 }
