@@ -11,9 +11,9 @@ namespace IModB.UI
     public class ScanResult
     {
         [DataMember]
-        public Guid ReaderId {get;set;}
+        public string SensorId {get;set;}
         [DataMember]
-        public Guid DeviceId { get; set; }
+        public string DeviceId { get; set; }
         [DataMember]
         public double Distance { get; set; }
         [DataMember]

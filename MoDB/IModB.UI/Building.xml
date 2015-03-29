@@ -5,44 +5,101 @@
       <id>A</id>
       <top>0</top>
       <left>0</left>
-      <width>35</width>
-      <height>35</height>
+      <width>200</width>
+      <height>200</height>
     </room>
     <room>
       <id>B</id>
-      <top>0</top>
-      <left>35</left>
-      <width>20</width>
-      <height>20</height>
+      <top>200</top>
+      <left>0</left>
+      <width>200</width>
+      <height>200</height>
+    </room>
+    <room>
+      <id>C</id>
+      <top>400</top>
+      <left>0</left>
+      <width>200</width>
+      <height>200</height>
+    </room>
+    <room>
+      <id>D</id>
+      <top>400</top>
+      <left>300</left>
+      <width>150</width>
+      <height>150</height>
+    </room>
+    <room>
+      <id>E</id>
+      <top>400</top>
+      <left>450</left>
+      <width>150</width>
+      <height>150</height>
+    </room>
+    <room>
+      <id>F</id>
+      <top>400</top>
+      <left>600</left>
+      <width>150</width>
+      <height>150</height>
     </room>
   </rooms>
   <doors>
     <door>
       <roomid>A</roomid>
       <id>DA1</id>
-      <orientation>vertical-left-center</orientation>
-    </door>
-    <door>
-      <roomid>A</roomid>
-      <id>DA2</id>
-      <orientation>vertical-right-center</orientation>
+      <orientation>VerticalRight</orientation>
+      <alignment>Center</alignment>
     </door>
     <door>
       <roomid>B</roomid>
       <id>DB1</id>
-      <orientation>horizontal-top-center</orientation>
+      <orientation>VerticalRight</orientation>
+      <alignment>Center</alignment>
+    </door>
+    <door>
+      <roomid>C</roomid>
+      <id>DC1</id>
+      <orientation>VerticalRight</orientation>
+      <alignment>Center</alignment>
+    </door>
+    <door>
+      <roomid>D</roomid>
+      <id>DD1</id>
+      <orientation>HorizontalBottom</orientation>
+      <alignment>Center</alignment>
+    </door>
+    <door>
+      <roomid>E</roomid>
+      <id>DE1</id>
+      <orientation>VerticalRight</orientation>
+      <alignment>Center</alignment>
+    </door>
+    <door>
+      <roomid>E</roomid>
+      <id>DE2</id>
+      <orientation>VerticalLeft</orientation>
+      <alignment>Center</alignment>
+    </door>
+    <door>
+      <roomid>F</roomid>
+      <id>DF1</id>
+      <orientation>HorizontalBottom</orientation>
+      <alignment>Center</alignment>
     </door>
   </doors>
   <sensors>
     <sensor>
       <roomid>A</roomid>
       <id>SA1</id>
-      <orientation>vertical-right-corner</orientation>
+      <orientation>HorizontalBottom</orientation>
+      <alignment>Center</alignment>
     </sensor>
     <sensor>
       <roomid>A</roomid>
       <id>SA2</id>
-      <orientation>vertical-left-corner</orientation>
+      <orientation>HorizontalTop</orientation>
+      <alignment>Center</alignment>
     </sensor>
   </sensors>
 </building>

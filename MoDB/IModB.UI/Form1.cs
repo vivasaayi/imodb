@@ -15,14 +15,14 @@ namespace IModB.UI
 {
     public partial class Form1 : Form
     {
-        List<RoomUserControl> _rooms = new List<RoomUserControl>();
+        List<BuildingUserControl> _rooms = new List<BuildingUserControl>();
 
         public Form1()
         {
             InitializeComponent();
             _rooms.Add(room1);
 
-            room1.OnReaderSelected += room1_OnReaderSelected;
+            //room1.OnReaderSelected += room1_OnReaderSelected;
 
             textBox1.Text = IMoDBSettings.URL;
             textBox2.Text = IMoDBSettings.Port.ToString();
@@ -30,7 +30,7 @@ namespace IModB.UI
 
         void room2_OnReaderSelected(Reader reader)
         {
-            room1.reader_OnReaderSelected(reader);
+            //room1.reader_OnReaderSelected(reader);
         }
 
         void room1_OnReaderSelected(Reader reader)
@@ -38,38 +38,9 @@ namespace IModB.UI
             //room2.reader_OnReaderSelected(reader);
         }
 
-        private void room1_DoubleClick(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Form1_DoubleClick(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void room1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void scanDevicesButton_Click(object sender, EventArgs e)
         {
-            var allReaders = new List<Reader>();
-
-            foreach (var room in _rooms)
-            {
-                allReaders.AddRange(room.getAllReaders());
-            }
-
-            List<ScanResult> scanResults = new List<ScanResult>();
-            foreach (var reader in allReaders)
-            {
-                var results = reader.ScanDevices();
-                scanResults.AddRange(results);
-                
-            }
-            
+            List<ScanResult> scanResults = room1.getScanResult();
 
             DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(List<ScanResult>));
             MemoryStream ms = new MemoryStream();
@@ -82,7 +53,7 @@ namespace IModB.UI
             StringBuilder sb = new StringBuilder();
             foreach (var result in scanResults)
             {
-                sb.Append("\"ReaderId\":\"").Append(result.ReaderId.ToString()).Append("\",")
+                sb.Append("\"ReaderId\":\"").Append(result.SensorId.ToString()).Append("\",")
                     .Append("\"DeviceId\":\"").Append(result.DeviceId.ToString()).Append("\",")
                     .Append("\"TimeStamp\":\"").Append(result.TimeStamp).Append("\",")
                     .Append("\"Distance\":\"").Append(result.Distance).Append("\",");
@@ -101,8 +72,8 @@ namespace IModB.UI
             if (dataGridView1.SelectedRows.Count == 0) return;
 
             DataGridViewRow row = dataGridView1.SelectedRows[0];
-            var readerId = (Guid)row.Cells[0].Value;
-            var deviceId = (Guid)row.Cells[1].Value;
+            var readerId = row.Cells[0].Value.ToString();
+            var deviceId = row.Cells[1].Value.ToString();
 
             foreach (var room in _rooms)
             {
@@ -131,6 +102,11 @@ namespace IModB.UI
         }
 
         private void loadRoomsButton_Click(object sender, EventArgs e)
+        {
+            InitializeBuildingStructure();
+        }
+
+        private void InitializeBuildingStructure()
         {
             var building = new Building();
             building.Initialize();

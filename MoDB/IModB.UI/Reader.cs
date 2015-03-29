@@ -17,7 +17,7 @@ namespace IModB.UI
         public event ReaderSelected OnReaderSelected;
 
         ReaderOrientation _orientation;
-        RoomUserControl _container;
+        BuildingUserControl _container;
         Rectangle _coordinates = new Rectangle();
 
         bool highlighted = false;
@@ -40,7 +40,7 @@ namespace IModB.UI
             }            
         }
 
-        internal void Initialize(ReaderOrientation orientation, RoomUserControl room)
+        internal void Initialize(ReaderOrientation orientation, BuildingUserControl room)
         {
             _orientation = orientation;
             _container = room;
@@ -70,15 +70,15 @@ namespace IModB.UI
         {
             List<ScanResult> results = new List<ScanResult>();
 
-            foreach (var device in this._container.getAllDevices())
-            {
-                var scanResult = new ScanResult();
-                scanResult.ReaderId = this.id;
-                scanResult.DeviceId = device.getMac();
-                scanResult.TimeStamp = DateTime.Now;
-                scanResult.Distance = CalculateDistance(device);
-                results.Add(scanResult);
-            }
+            //foreach (var device in this._container.getAllDevices())
+            //{
+            //    var scanResult = new ScanResult();
+            //    scanResult.ReaderId = this.id;
+            //    scanResult.DeviceId = device.getMac();
+            //    scanResult.TimeStamp = DateTime.Now;
+            //    scanResult.Distance = CalculateDistance(device);
+            //    results.Add(scanResult);
+            //}
 
             return results;
         }
@@ -86,7 +86,6 @@ namespace IModB.UI
         private double CalculateDistance(UI.Device device)
         {
             return Math.Sqrt(Math.Pow((device.Left - this._coordinates.X), 2) + Math.Pow((device.Top - this._coordinates.Y), 2));
-
         }
 
         internal Guid getId()

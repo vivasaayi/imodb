@@ -51,9 +51,9 @@ namespace IModB.UI.UI
             }
         }
 
-        internal Guid getMac()
+        internal string getMac()
         {
-            return id;
+            return id.ToString();
         }
 
         bool HighLighted;

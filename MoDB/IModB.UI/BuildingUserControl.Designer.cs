@@ -1,6 +1,6 @@
 ﻿namespace IModB.UI
 {
-    partial class RoomUserControl
+    partial class BuildingUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,16 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // Room
+            // BuildingUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Name = "Room";
+            this.BackColor = System.Drawing.Color.Cornsilk;
+            this.Name = "BuildingUserControl";
             this.Size = new System.Drawing.Size(350, 200);
-            this.Load += new System.EventHandler(this.Room_Load);
-            this.Click += new System.EventHandler(this.Room_Click);
-            this.DoubleClick += new System.EventHandler(this.Room_DoubleClick);
+            this.DoubleClick += new System.EventHandler(this.BuildingUserControl_DoubleClick);
             this.ResumeLayout(false);
 
         }

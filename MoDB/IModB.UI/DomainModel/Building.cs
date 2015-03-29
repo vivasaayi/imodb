@@ -38,8 +38,10 @@ namespace IModB.UI.DomainModel
                 var sensor = new Sensor();
                 sensor.Id = row["id"].ToString();
                 sensor.RoomId = row["roomid"].ToString();
+                sensor.Orientation = row["orientation"].ToString();
+                sensor.Alignment = row["alignment"].ToString();
 
-                _rooms[sensor.RoomId].Sensors.Add(sensor.Id, sensor);
+                _rooms[sensor.RoomId].AddSensor(sensor);
             }
         }
 
@@ -65,8 +67,10 @@ namespace IModB.UI.DomainModel
                 var door = new Door();
                 door.RoomId = row["roomid"].ToString();
                 door.Id = row["id"].ToString();
+                door.Orientation = row["orientation"].ToString();
+                door.Alignment = row["alignment"].ToString();
 
-                _rooms[door.RoomId].Doors.Add(door.Id, door);
+                _rooms[door.RoomId].AddDoor(door);
             }
         }
     }
