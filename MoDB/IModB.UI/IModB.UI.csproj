@@ -50,7 +50,6 @@
     <Compile Include="DomainModel\Orientation.cs" />
     <Compile Include="DomainModel\Room.cs" />
     <Compile Include="DomainModel\Sensor.cs" />
-    <Compile Include="DomainModel\Utils.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

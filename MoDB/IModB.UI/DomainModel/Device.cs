@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IModBLocationInfoCollector;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -71,16 +72,21 @@ namespace IModB.UI.DomainModel
 
         internal void Track(IEnumerable<Sensor> allSensors)
         {
-            List<Sensor> validSensors = new List<Sensor>();
+            List<ApCircle> circles = new List<ApCircle>();
             foreach (var sensor in allSensors)
             {
                 var distance = Utils.CalculateDistance(this.Left, this.Top, sensor.Coordinates.X, sensor.Coordinates.Y);
 
                 if (distance < 170)
                 {
-                    validSensors.Add(sensor);
+                    ApCircle circle = new ApCircle();
+                    circle.X = sensor.Coordinates.X;
+                    circle.Y = sensor.Coordinates.Y;
+                    circle.Radius = (int)distance;
+                    circles.Add(circle);
                 }
             }
+
         }
     }
 }
