@@ -74,7 +74,7 @@ namespace IModB.UI.DomainModel
             List<Sensor> validSensors = new List<Sensor>();
             foreach (var sensor in allSensors)
             {
-                var distance = Utils.CalculateDistance(this.Left, this.Top, sensor.Coordinates.Top, sensor.Coordinates.Left);
+                var distance = Utils.CalculateDistance(this.Left, this.Top, sensor.Coordinates.X, sensor.Coordinates.Y);
 
                 if (distance < 170)
                 {

@@ -32,10 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -61,8 +57,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="IMoDBSettings.cs" />
-    <Compile Include="NetworkHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BuildingUserControl.cs">
@@ -73,6 +67,18 @@
     </Compile>
     <Compile Include="DomainModel\ScanResult.cs" />
     <Compile Include="DomainModel\Device.cs" />
+    <Compile Include="RealTimeActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RealTimeActivityForm.Designer.cs">
+      <DependentUpon>RealTimeActivityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrackHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TrackHistory.Designer.cs">
+      <DependentUpon>TrackHistory.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -87,6 +93,12 @@
     </Compile>
     <EmbeddedResource Include="BuildingUserControl.resx">
       <DependentUpon>BuildingUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RealTimeActivityForm.resx">
+      <DependentUpon>RealTimeActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrackHistory.resx">
+      <DependentUpon>TrackHistory.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -108,6 +120,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IModBLocationInfoCollector\IModBLocationInfoCollector.csproj">
+      <Project>{ea82b593-0b70-4ed5-8119-32a3d2e2ef0f}</Project>
+      <Name>IModBLocationInfoCollector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

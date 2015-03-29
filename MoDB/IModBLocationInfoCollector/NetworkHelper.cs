@@ -7,9 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace IModB.UI
+namespace IModBLocationInfoCollector
 {
     public class NetworkHelper
     {
@@ -20,6 +21,11 @@ namespace IModB.UI
 
         public void PostData(string data)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                return;
+            }
+
             try
             {
                 var url = GetBaseUrl() + "location/";
@@ -42,6 +48,7 @@ namespace IModB.UI
                 using (StreamReader sr = new StreamReader(response.GetResponseStream()))
                 {
                     var resultdata = sr.ReadToEnd();
+                    Console.WriteLine(resultdata);
                 }
             }
             catch (Exception ex)
@@ -55,12 +62,13 @@ namespace IModB.UI
             try
             {
                 var url = GetBaseUrl() + "location/" + ids;
+                Console.WriteLine("Deleting Data:" + url);
 
                 //url = "http://localhost:1853/home/about";
 
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url); ;
                 request.Method = "DELETE";
-                
+
                 var response = request.GetResponse();
 
                 var resultdata = "";
@@ -69,76 +77,98 @@ namespace IModB.UI
                     resultdata = sr.ReadToEnd();
                 }
 
-                Console.WriteLine(resultdata);
+                Console.WriteLine("Data deleted successfully");
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("Error when deleting data..");
+                Console.WriteLine(ex.ToString());
             }
         }
 
         public void GetRecenteData()
         {
-            var url = this.GetBaseUrl() + "location/recent";
-
-            //url = "http://localhost:4142/home/about";
-
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url); ;
-            request.Method = "GET";
-            
-            var response = request.GetResponse();
-
-            List<LocationInfo> locationInfoList = new List<LocationInfo>();
-            Dictionary<string, string> docs = new Dictionary<string, string>();
-
-            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+            try
             {
-                var resultdata = sr.ReadToEnd();
+                var url = this.GetBaseUrl() + "location/recent";
 
-                JObject o = JObject.Parse(resultdata);
+                //url = "http://localhost:4142/home/about";
+                Console.WriteLine("Fetching from:" + url);
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url); ;
+                request.Method = "GET";
 
-                for (int i = 0; i < o["result"].Count(); i++)
+                var response = request.GetResponse();
+
+                List<LocationInfo> locationInfoList = new List<LocationInfo>();
+                Dictionary<string, string> docs = new Dictionary<string, string>();
+
+                Console.WriteLine("Response Received");
+                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
                 {
-                    var dataSet = o["result"][i];
-                    var data = dataSet["data"];
+                    var resultdata = sr.ReadToEnd();
 
-                    docs.Add(dataSet["_id"].Value<string>(), "");
+                    JObject o = JObject.Parse(resultdata);
 
-                    for (int j = 0; j < data.Count(); j++)
+                    for (int i = 0; i < o["result"].Count(); i++)
                     {
-                        var locationInfo = data[j];
+                        var dataSet = o["result"][i];
+                        var data = dataSet["data"];
 
-                        var deviceId = locationInfo["DeviceId"].Value<string>();
-                        var deviceName = locationInfo["DeviceName"].Value<string>();
-                        var sensorId = locationInfo["SensorId"].Value<string>();
-                        var distance = locationInfo["Distance"].Value<Decimal>();
-                        var time = locationInfo["TimeStamp"].Value<DateTime>();
+                        docs.Add(dataSet["_id"].Value<string>(), "");
 
-                        var loc = new LocationInfo();
+                        for (int j = 0; j < data.Count(); j++)
+                        {
+                            var locationInfo = data[j];
 
-                        loc.DeviceId = deviceId;
-                        loc.DeviceName = deviceName;
-                        loc.SensorId = sensorId;
-                        loc.Distance = distance;
-                        loc.TimeStamp = time;
+                            var deviceId = locationInfo["DeviceId"].Value<string>();
+                            var deviceName = locationInfo["DeviceName"].Value<string>();
+                            var sensorId = locationInfo["SensorId"].Value<string>();
+                            var distance = locationInfo["Distance"].Value<Decimal>();
+                            var time = locationInfo["TimeStamp"].Value<DateTime>();
 
-                        locationInfoList.Add(loc);
+                            var loc = new LocationInfo();
+
+                            loc.DeviceId = deviceId;
+                            loc.DeviceName = deviceName;
+                            loc.SensorId = sensorId;
+                            loc.Distance = distance;
+                            loc.TimeStamp = time;
+
+                            locationInfoList.Add(loc);
+                        }
                     }
+
+
                 }
 
-                
-            }
-            UpdateLocationsInDB(locationInfoList);
-            var docIdsToDeleteArray = docs.Keys.ToArray();
+                if (locationInfoList.Count > 0)
+                {
+                    Console.WriteLine("Updating downloaded data to database");
+                    UpdateLocationsInDB(locationInfoList);
+                    Console.WriteLine("Database updated");
 
-            DeleteData(string.Join(",", docIdsToDeleteArray));
+                    var docIdsToDeleteArray = docs.Keys.ToArray();
+
+
+                    DeleteData(string.Join(",", docIdsToDeleteArray));
+                }
+                else
+                {
+                    Console.WriteLine("No data retrived from server");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error when getitng recent data..");
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         string _connectionString = "Server=localhost;Database=imodb;Trusted_Connection=True";
 
         public void UpdateProcessedDocuments(string documentId, string details)
         {
-            
+
         }
 
         public void UpdateLocationsInDB(List<LocationInfo> locationInfo)

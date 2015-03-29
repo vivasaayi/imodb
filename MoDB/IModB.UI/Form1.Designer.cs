@@ -45,6 +45,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.buildingUserControl = new IModB.UI.BuildingUserControl();
             this.trackMeButton = new System.Windows.Forms.Button();
+            this.realTimeTrackerButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -86,7 +87,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 70);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(385, 346);
+            this.tabControl1.Size = new System.Drawing.Size(551, 346);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
@@ -95,7 +96,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(377, 320);
+            this.tabPage1.Size = new System.Drawing.Size(543, 320);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Result";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -109,7 +110,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(371, 314);
+            this.dataGridView1.Size = new System.Drawing.Size(537, 314);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -210,6 +211,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.realTimeTrackerButton);
             this.splitContainer1.Panel2.Controls.Add(this.trackMeButton);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.loadRoomsButton);
@@ -219,8 +221,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.textBox1);
             this.splitContainer1.Panel2.Controls.Add(this.fetchDataButton);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Size = new System.Drawing.Size(904, 428);
-            this.splitContainer1.SplitterDistance = 500;
+            this.splitContainer1.Size = new System.Drawing.Size(1191, 428);
+            this.splitContainer1.SplitterDistance = 621;
             this.splitContainer1.TabIndex = 12;
             // 
             // buildingUserControl
@@ -231,7 +233,7 @@
             this.buildingUserControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.buildingUserControl.Location = new System.Drawing.Point(0, 0);
             this.buildingUserControl.Name = "buildingUserControl";
-            this.buildingUserControl.Size = new System.Drawing.Size(501, 425);
+            this.buildingUserControl.Size = new System.Drawing.Size(622, 425);
             this.buildingUserControl.TabIndex = 3;
             // 
             // trackMeButton
@@ -244,11 +246,21 @@
             this.trackMeButton.UseVisualStyleBackColor = true;
             this.trackMeButton.Click += new System.EventHandler(this.trackMeButton_Click);
             // 
+            // realTimeTrackerButton
+            // 
+            this.realTimeTrackerButton.Location = new System.Drawing.Point(403, 38);
+            this.realTimeTrackerButton.Name = "realTimeTrackerButton";
+            this.realTimeTrackerButton.Size = new System.Drawing.Size(75, 23);
+            this.realTimeTrackerButton.TabIndex = 13;
+            this.realTimeTrackerButton.Text = "Real Time";
+            this.realTimeTrackerButton.UseVisualStyleBackColor = true;
+            this.realTimeTrackerButton.Click += new System.EventHandler(this.realTimeTrackerButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 428);
+            this.ClientSize = new System.Drawing.Size(1191, 428);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -287,6 +299,7 @@
         private System.Windows.Forms.Button loadRoomsButton;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button trackMeButton;
+        private System.Windows.Forms.Button realTimeTrackerButton;
     }
 }
 

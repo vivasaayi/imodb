@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IModB.UI", "IModB.UI\IModB.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IModBLocationInfoCollector", "IModBLocationInfoCollector\IModBLocationInfoCollector.csproj", "{EA82B593-0B70-4ED5-8119-32A3D2E2EF0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoDBCollector", "MoDBCollector\MoDBCollector.csproj", "{AF023770-D558-49FC-A2E0-CFAFDF8C2EFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EA82B593-0B70-4ED5-8119-32A3D2E2EF0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA82B593-0B70-4ED5-8119-32A3D2E2EF0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA82B593-0B70-4ED5-8119-32A3D2E2EF0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF023770-D558-49FC-A2E0-CFAFDF8C2EFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF023770-D558-49FC-A2E0-CFAFDF8C2EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF023770-D558-49FC-A2E0-CFAFDF8C2EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF023770-D558-49FC-A2E0-CFAFDF8C2EFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

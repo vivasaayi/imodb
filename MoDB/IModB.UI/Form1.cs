@@ -1,4 +1,5 @@
 ﻿using IModB.UI.DomainModel;
+using IModBLocationInfoCollector;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,7 +51,7 @@ namespace IModB.UI
             richTextBox1.Text = sb.ToString();
             richTextBox2.Text = jsonToBePosted;
 
-            new NetworkHelper().PostData(jsonToBePosted);
+            //new NetworkHelper().PostData(jsonToBePosted);
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -101,6 +102,12 @@ namespace IModB.UI
         private void trackMeButton_Click(object sender, EventArgs e)
         {
             buildingUserControl.TrackAllDevices();
+        }
+
+        private void realTimeTrackerButton_Click(object sender, EventArgs e)
+        {
+            var realTimeActivityForm = new RealTimeActivityForm();
+            realTimeActivityForm.Show();
         }
     }
 }
