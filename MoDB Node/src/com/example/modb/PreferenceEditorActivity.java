@@ -51,6 +51,7 @@ public class PreferenceEditorActivity extends Activity implements OnClickListene
 			editor.putString("Port", portEditView.getText().toString());
 
 			editor.commit();
+			
 			Toast.makeText(this, "Settings Saved", Toast.LENGTH_LONG).show();
 		}
 	}

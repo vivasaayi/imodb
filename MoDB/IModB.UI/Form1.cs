@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IModB.UI.DomainModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,16 +15,14 @@ namespace IModB.UI
 {
     public partial class Form1 : Form
     {
-        List<Room> _rooms = new List<Room>();
+        List<RoomUserControl> _rooms = new List<RoomUserControl>();
 
         public Form1()
         {
             InitializeComponent();
             _rooms.Add(room1);
-            _rooms.Add(room2);
 
             room1.OnReaderSelected += room1_OnReaderSelected;
-            room2.OnReaderSelected += room2_OnReaderSelected;
 
             textBox1.Text = IMoDBSettings.URL;
             textBox2.Text = IMoDBSettings.Port.ToString();
@@ -36,7 +35,7 @@ namespace IModB.UI
 
         void room1_OnReaderSelected(Reader reader)
         {
-            room2.reader_OnReaderSelected(reader);
+            //room2.reader_OnReaderSelected(reader);
         }
 
         private void room1_DoubleClick(object sender, EventArgs e)
@@ -129,6 +128,13 @@ namespace IModB.UI
             {
                 IMoDBSettings.Port = port;
             }
+        }
+
+        private void loadRoomsButton_Click(object sender, EventArgs e)
+        {
+            var building = new Building();
+            building.Initialize();
+            room1.LoadData(building);
         }
     }
 }

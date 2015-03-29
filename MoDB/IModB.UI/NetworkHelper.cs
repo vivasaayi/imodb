@@ -20,26 +20,33 @@ namespace IModB.UI
 
         public void PostData(string data)
         {
-            var url = GetBaseUrl() + "location/";
-
-            //url = "http://localhost:1853/home/about";
-
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url); ;
-            request.Method = "POST";
-            request.ContentType = "application/json; charset=utf-8";
-
-            var outputStream = request.GetRequestStream();
-
-            StreamWriter sw = new StreamWriter(outputStream);
-            sw.Write(data);
-            sw.Close();
-            outputStream.Close();
-
-            var response = request.GetResponse();
-
-            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+            try
             {
-                var resultdata = sr.ReadToEnd();
+                var url = GetBaseUrl() + "location/";
+
+                //url = "http://localhost:1853/home/about";
+
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url); ;
+                request.Method = "POST";
+                request.ContentType = "application/json; charset=utf-8";
+
+                var outputStream = request.GetRequestStream();
+
+                StreamWriter sw = new StreamWriter(outputStream);
+                sw.Write(data);
+                sw.Close();
+                outputStream.Close();
+
+                var response = request.GetResponse();
+
+                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                {
+                    var resultdata = sr.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 

@@ -31,6 +31,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -48,6 +49,7 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.bluetooth_ap);
 
 		IntentFilter actionFoundFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
@@ -62,11 +64,12 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 
 		addDeviceButton.setOnClickListener(this);
 		postResultsButton.setOnClickListener(this);
+		startScanButton.setOnClickListener(this);
 	}
 
 	public void onClick(View view) {
 		try {
-			if (view == startScanButton) {
+			if (view == startScanButton) {				
 				blueToothAdapter = BluetoothAdapter.getDefaultAdapter();
 
 				if (blueToothAdapter == null) {
@@ -81,6 +84,7 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 					} else {
 						Log.d("debug", "Bluetooth Enabled.");
 					}
+					Toast.makeText(this, "Starting Discovery...", Toast.LENGTH_LONG).show();
 					blueToothAdapter.startDiscovery();
 				}
 			} else if (view == addDeviceButton) {
@@ -161,6 +165,9 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "Posting Scan Results to: " + url, Toast.LENGTH_LONG).show();
 			
 			new HttpPostTask().execute(url, buffer.toString());
+			scannedDevices.clear();
+			TableLayout tl = (TableLayout) this.findViewById(R.id.bluetoothDevicesTable);
+			tl.removeAllViews();
 		} catch (Exception ex) {
 			Toast.makeText(this, "Error Posting Scan Results to: " + ex.getMessage(), Toast.LENGTH_LONG).show();
 		}
@@ -183,6 +190,8 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 			} else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
 				Log.d("debug", "Scan Finished");
 				updateDeviceDetailsToRemoteServer();
+				Toast.makeText(BlueToothAPActivity.this, "Starting Discovery...", Toast.LENGTH_LONG).show();
+				blueToothAdapter.startDiscovery();
 			} else {
 				Log.d("Sp,e other intend recieved", "Scan Finished");
 			}
@@ -219,7 +228,7 @@ public class BlueToothAPActivity extends Activity implements OnClickListener {
 			Log.d("debug", "No Paired Devices");
 		}
 	}
-
+	
 	private class HttpPostTask extends AsyncTask<String, Void, String> {
 
 		@Override

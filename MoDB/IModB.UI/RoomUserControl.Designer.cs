@@ -1,6 +1,6 @@
 ﻿namespace IModB.UI
 {
-    partial class Room
+    partial class RoomUserControl
     {
         /// <summary> 
         /// Required designer variable.

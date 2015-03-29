@@ -17,7 +17,7 @@ namespace IModB.UI
         public event ReaderSelected OnReaderSelected;
 
         ReaderOrientation _orientation;
-        Room _container;
+        RoomUserControl _container;
         Rectangle _coordinates = new Rectangle();
 
         bool highlighted = false;
@@ -40,7 +40,7 @@ namespace IModB.UI
             }            
         }
 
-        internal void Initialize(ReaderOrientation orientation, Room room)
+        internal void Initialize(ReaderOrientation orientation, RoomUserControl room)
         {
             _orientation = orientation;
             _container = room;

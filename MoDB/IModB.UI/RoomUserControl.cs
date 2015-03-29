@@ -8,17 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using IModB.UI.UI;
+using IModB.UI.DomainModel;
 
 namespace IModB.UI
 {
-    public partial class Room : UserControl
+    public partial class RoomUserControl : UserControl
     {
         List<Reader> _readers = new List<Reader>();
         List<Device> _devices = new List<Device>();
 
         public event ReaderSelected OnReaderSelected;
 
-        public Room()
+        public RoomUserControl()
         {
             InitializeComponent();
             AddReaders();
@@ -65,10 +66,10 @@ namespace IModB.UI
             }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            Draw(e.Graphics);
-        }
+        //protected override void OnPaint(PaintEventArgs e)
+        //{
+        //    Draw(e.Graphics);
+        //}
 
         private void Draw(Graphics g)
         {
@@ -173,6 +174,12 @@ namespace IModB.UI
             {
                 g.DrawLine(Pens.Blue, selectedReader.GetCoordinates(), selectedDevice.GetCoordinates());
             }
+        }
+
+        Building _building = new Building();
+        internal void LoadData(Building building)
+        {
+            _building = building;
         }
     }
 }
