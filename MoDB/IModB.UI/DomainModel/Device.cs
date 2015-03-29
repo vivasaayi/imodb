@@ -68,5 +68,19 @@ namespace IModB.UI.DomainModel
         {
             return new Point(this.Left, this.Top);
         }
+
+        internal void Track(IEnumerable<Sensor> allSensors)
+        {
+            List<Sensor> validSensors = new List<Sensor>();
+            foreach (var sensor in allSensors)
+            {
+                var distance = Utils.CalculateDistance(this.Left, this.Top, sensor.Coordinates.Top, sensor.Coordinates.Left);
+
+                if (distance < 170)
+                {
+                    validSensors.Add(sensor);
+                }
+            }
+        }
     }
 }

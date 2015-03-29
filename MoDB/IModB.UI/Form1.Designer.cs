@@ -44,6 +44,7 @@
             this.loadRoomsButton = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.buildingUserControl = new IModB.UI.BuildingUserControl();
+            this.trackMeButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -57,7 +58,7 @@
             // 
             // scanDevicesButton
             // 
-            this.scanDevicesButton.Location = new System.Drawing.Point(3, 41);
+            this.scanDevicesButton.Location = new System.Drawing.Point(169, 38);
             this.scanDevicesButton.Name = "scanDevicesButton";
             this.scanDevicesButton.Size = new System.Drawing.Size(112, 23);
             this.scanDevicesButton.TabIndex = 1;
@@ -145,7 +146,7 @@
             // 
             // fetchDataButton
             // 
-            this.fetchDataButton.Location = new System.Drawing.Point(121, 41);
+            this.fetchDataButton.Location = new System.Drawing.Point(285, 38);
             this.fetchDataButton.Name = "fetchDataButton";
             this.fetchDataButton.Size = new System.Drawing.Size(112, 23);
             this.fetchDataButton.TabIndex = 6;
@@ -189,11 +190,11 @@
             // 
             // loadRoomsButton
             // 
-            this.loadRoomsButton.Location = new System.Drawing.Point(239, 41);
+            this.loadRoomsButton.Location = new System.Drawing.Point(7, 38);
             this.loadRoomsButton.Name = "loadRoomsButton";
             this.loadRoomsButton.Size = new System.Drawing.Size(75, 23);
             this.loadRoomsButton.TabIndex = 11;
-            this.loadRoomsButton.Text = "LoadRooms";
+            this.loadRoomsButton.Text = "Load Rooms";
             this.loadRoomsButton.UseVisualStyleBackColor = true;
             this.loadRoomsButton.Click += new System.EventHandler(this.loadRoomsButton_Click);
             // 
@@ -209,6 +210,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.trackMeButton);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.loadRoomsButton);
             this.splitContainer1.Panel2.Controls.Add(this.scanDevicesButton);
@@ -231,6 +233,16 @@
             this.buildingUserControl.Name = "buildingUserControl";
             this.buildingUserControl.Size = new System.Drawing.Size(501, 425);
             this.buildingUserControl.TabIndex = 3;
+            // 
+            // trackMeButton
+            // 
+            this.trackMeButton.Location = new System.Drawing.Point(88, 38);
+            this.trackMeButton.Name = "trackMeButton";
+            this.trackMeButton.Size = new System.Drawing.Size(75, 23);
+            this.trackMeButton.TabIndex = 12;
+            this.trackMeButton.Text = "Track Me";
+            this.trackMeButton.UseVisualStyleBackColor = true;
+            this.trackMeButton.Click += new System.EventHandler(this.trackMeButton_Click);
             // 
             // Form1
             // 
@@ -274,6 +286,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button loadRoomsButton;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Button trackMeButton;
     }
 }
 

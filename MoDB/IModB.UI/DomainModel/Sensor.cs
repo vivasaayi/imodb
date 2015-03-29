@@ -36,7 +36,7 @@ namespace IModB.UI.DomainModel
             foreach (var device in _devices)
             {
                 var distance = Utils.CalculateDistance(this.Coordinates.X, this.Coordinates.Y, device.Left, device.Top);
-                if (distance <= 180)
+                if (distance <= 170)
                 {
                     var scanResult = new ScanResult();
                     scanResult.SensorId = this.Id;

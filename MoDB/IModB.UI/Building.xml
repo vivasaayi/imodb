@@ -101,5 +101,11 @@
       <orientation>HorizontalTop</orientation>
       <alignment>Center</alignment>
     </sensor>
+    <sensor>
+      <roomid>A</roomid>
+      <id>SA3</id>
+      <orientation>VerticalLeft</orientation>
+      <alignment>Center</alignment>
+    </sensor>
   </sensors>
 </building>

@@ -96,5 +96,10 @@ namespace IModB.UI
             building.Initialize();
             buildingUserControl.LoadData(building);
         }
+
+        private void trackMeButton_Click(object sender, EventArgs e)
+        {
+            buildingUserControl.TrackAllDevices();
+        }
     }
 }

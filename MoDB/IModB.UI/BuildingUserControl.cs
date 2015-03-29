@@ -58,7 +58,7 @@ namespace IModB.UI
                     {
                         sensor.HighLight(g, false);
                     }
-                }                
+                }
             }
 
             foreach (var device in _devices)
@@ -113,6 +113,23 @@ namespace IModB.UI
             }
 
             return scanResult;
+        }
+
+        internal void TrackAllDevices()
+        {
+            List<Sensor> allSensors = new List<Sensor>();
+            foreach (var room in _building.Rooms.Values)
+            {
+                foreach (var sensor in room.Sensors.Values)
+                {
+                    allSensors.Add(sensor);
+                }
+            }
+
+            foreach (var device in _devices)
+            {
+                device.Track(allSensors);
+            }
         }
     }
 }
