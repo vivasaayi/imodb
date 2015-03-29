@@ -22,6 +22,9 @@ namespace IModB.UI
 
             textBox1.Text = IMoDBSettings.URL;
             textBox2.Text = IMoDBSettings.Port.ToString();
+
+            devicesListBox.DataSource = _devices;
+            devicesListBox.DisplayMember = "DeviceId";
         }
 
         private void scanDevicesButton_Click(object sender, EventArgs e)
@@ -99,15 +102,31 @@ namespace IModB.UI
             buildingUserControl.LoadData(building);
         }
 
+        BindingList<Device> _devices = new BindingList<Device>();
         private void trackMeButton_Click(object sender, EventArgs e)
-        {
-            buildingUserControl.TrackAllDevices();
+        {   
+            var devices = buildingUserControl.TrackAllDevices();
+
+            _devices.Clear();
+            foreach (var device in devices)
+            {
+                _devices.Add(device);
+            }
         }
 
         private void realTimeTrackerButton_Click(object sender, EventArgs e)
         {
             var realTimeActivityForm = new RealTimeActivityForm();
             realTimeActivityForm.Show();
+        }
+
+        private void devicesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (devicesListBox.SelectedIndex >= 0)
+            {
+                var selectedDevice = (Device)devicesListBox.SelectedItem;
+                buildingUserControl.PositionDevice(selectedDevice);
+            }
         }
     }
 }

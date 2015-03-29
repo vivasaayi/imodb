@@ -115,7 +115,7 @@ namespace IModB.UI
             return scanResult;
         }
 
-        internal void TrackAllDevices()
+        internal IEnumerable<Device> TrackAllDevices()
         {
             List<Sensor> allSensors = new List<Sensor>();
             foreach (var room in _building.Rooms.Values)
@@ -130,6 +130,15 @@ namespace IModB.UI
             {
                 device.Track(allSensors);
             }
+
+            return _devices;
+        }
+
+        internal void PositionDevice(Device selectedDevice)
+        {
+            var g = this.CreateGraphics();
+            this.Draw(g);
+            selectedDevice.Position(g);
         }
     }
 }

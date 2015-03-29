@@ -14,6 +14,14 @@ namespace IModB.UI.DomainModel
     {
         Guid id = Guid.NewGuid();
 
+        public string DeviceId
+        {
+            get
+            {
+                return id.ToString();
+            }
+        }
+
         public int Top, Left, Width = 20, Height = 20;
 
         bool selected = false;
@@ -70,9 +78,11 @@ namespace IModB.UI.DomainModel
             return new Point(this.Left, this.Top);
         }
 
+        List<ApCircle> _circles = new List<ApCircle>();
+        
         internal void Track(IEnumerable<Sensor> allSensors)
         {
-            List<ApCircle> circles = new List<ApCircle>();
+            
             foreach (var sensor in allSensors)
             {
                 var distance = Utils.CalculateDistance(this.Left, this.Top, sensor.Coordinates.X, sensor.Coordinates.Y);
@@ -83,10 +93,27 @@ namespace IModB.UI.DomainModel
                     circle.X = sensor.Coordinates.X;
                     circle.Y = sensor.Coordinates.Y;
                     circle.Radius = (int)distance;
-                    circles.Add(circle);
+                    _circles.Add(circle);
                 }
             }
 
+        }
+
+
+
+        internal void Position(Graphics graphics)
+        {
+            foreach (var circle in _circles)
+            {
+                graphics.DrawEllipse(Pens.Black, circle.X - circle.Radius, circle.Y - circle.Radius, 2 * circle.Radius, 2 * circle.Radius);
+            }
+
+            var _allIntersectingPoints = new Triangulator().GetAllIntersectingPoints(_circles);
+
+            foreach (var point in _allIntersectingPoints)
+            {
+                graphics.DrawEllipse(Pens.Blue, point.X - 10, point.Y - 10, 20, 20);
+            }
         }
     }
 }

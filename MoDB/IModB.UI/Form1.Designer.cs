@@ -43,9 +43,11 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.loadRoomsButton = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.buildingUserControl = new IModB.UI.BuildingUserControl();
-            this.trackMeButton = new System.Windows.Forms.Button();
             this.realTimeTrackerButton = new System.Windows.Forms.Button();
+            this.trackMeButton = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.devicesListBox = new System.Windows.Forms.ListBox();
+            this.buildingUserControl = new IModB.UI.BuildingUserControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -55,6 +57,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // scanDevicesButton
@@ -72,7 +75,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(3, 3);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(371, 314);
+            this.richTextBox1.Size = new System.Drawing.Size(537, 314);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -84,6 +87,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(3, 70);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -120,7 +124,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(377, 320);
+            this.tabPage2.Size = new System.Drawing.Size(543, 320);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Data Transferred";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -131,7 +135,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(377, 320);
+            this.tabPage3.Size = new System.Drawing.Size(543, 320);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "JSON Data";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -141,7 +145,7 @@
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox2.Location = new System.Drawing.Point(3, 3);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(371, 314);
+            this.richTextBox2.Size = new System.Drawing.Size(537, 314);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             // 
@@ -225,16 +229,15 @@
             this.splitContainer1.SplitterDistance = 621;
             this.splitContainer1.TabIndex = 12;
             // 
-            // buildingUserControl
+            // realTimeTrackerButton
             // 
-            this.buildingUserControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buildingUserControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buildingUserControl.Location = new System.Drawing.Point(0, 0);
-            this.buildingUserControl.Name = "buildingUserControl";
-            this.buildingUserControl.Size = new System.Drawing.Size(622, 425);
-            this.buildingUserControl.TabIndex = 3;
+            this.realTimeTrackerButton.Location = new System.Drawing.Point(403, 38);
+            this.realTimeTrackerButton.Name = "realTimeTrackerButton";
+            this.realTimeTrackerButton.Size = new System.Drawing.Size(75, 23);
+            this.realTimeTrackerButton.TabIndex = 13;
+            this.realTimeTrackerButton.Text = "Real Time";
+            this.realTimeTrackerButton.UseVisualStyleBackColor = true;
+            this.realTimeTrackerButton.Click += new System.EventHandler(this.realTimeTrackerButton_Click);
             // 
             // trackMeButton
             // 
@@ -246,15 +249,36 @@
             this.trackMeButton.UseVisualStyleBackColor = true;
             this.trackMeButton.Click += new System.EventHandler(this.trackMeButton_Click);
             // 
-            // realTimeTrackerButton
+            // tabPage4
             // 
-            this.realTimeTrackerButton.Location = new System.Drawing.Point(403, 38);
-            this.realTimeTrackerButton.Name = "realTimeTrackerButton";
-            this.realTimeTrackerButton.Size = new System.Drawing.Size(75, 23);
-            this.realTimeTrackerButton.TabIndex = 13;
-            this.realTimeTrackerButton.Text = "Real Time";
-            this.realTimeTrackerButton.UseVisualStyleBackColor = true;
-            this.realTimeTrackerButton.Click += new System.EventHandler(this.realTimeTrackerButton_Click);
+            this.tabPage4.Controls.Add(this.devicesListBox);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(543, 320);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Devices";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // devicesListBox
+            // 
+            this.devicesListBox.FormattingEnabled = true;
+            this.devicesListBox.Location = new System.Drawing.Point(6, 6);
+            this.devicesListBox.Name = "devicesListBox";
+            this.devicesListBox.Size = new System.Drawing.Size(248, 303);
+            this.devicesListBox.TabIndex = 0;
+            this.devicesListBox.SelectedIndexChanged += new System.EventHandler(this.devicesListBox_SelectedIndexChanged);
+            // 
+            // buildingUserControl
+            // 
+            this.buildingUserControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buildingUserControl.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buildingUserControl.Location = new System.Drawing.Point(0, 0);
+            this.buildingUserControl.Name = "buildingUserControl";
+            this.buildingUserControl.Size = new System.Drawing.Size(622, 425);
+            this.buildingUserControl.TabIndex = 3;
             // 
             // Form1
             // 
@@ -276,6 +300,7 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -300,6 +325,8 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button trackMeButton;
         private System.Windows.Forms.Button realTimeTrackerButton;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ListBox devicesListBox;
     }
 }
 
