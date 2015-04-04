@@ -56,12 +56,16 @@ namespace IModB.UI
                 e.Graphics.DrawEllipse(Pens.Black, circle.X - circle.Radius, circle.Y - circle.Radius, 2 * circle.Radius, 2 * circle.Radius);
             }
 
-            var _allIntersectingPoints = new Triangulator().GetAllIntersectingPoints(_circles);
+            var triangulator = new Triangulator();
+            var _allIntersectingPoints = triangulator.GetAllIntersectingPoints(_circles);
+            var location = triangulator.GetCentroidForPoints(_allIntersectingPoints);
 
             foreach (var point in _allIntersectingPoints)
             {
                 e.Graphics.DrawEllipse(Pens.Blue, point.X - 10, point.Y - 10, 20, 20);
             }
+
+            e.Graphics.FillEllipse(Brushes.Violet, location.X - 10, location.Y - 10, 20, 20);
         }
 
         

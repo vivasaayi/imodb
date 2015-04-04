@@ -139,6 +139,19 @@ namespace IModB.UI
             var g = this.CreateGraphics();
             this.Draw(g);
             selectedDevice.Position(g);
+
+            foreach (var device in _devices)
+            {
+                if (device.DeviceId == selectedDevice.DeviceId)
+                {
+                    device.HighLight(g, true);
+                    selectedDevice = device;
+                }
+                else
+                {
+                    device.HighLight(g, false);
+                }
+            }
         }
     }
 }
