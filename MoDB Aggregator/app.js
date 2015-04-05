@@ -6,7 +6,7 @@ var app = express();
 var path = require('path');
 var util = require("util");
 var bodyParser = require('body-parser');
-var databaseHelper = require("dal");
+var databaseHelper = require("./app/repositories/database-heler");
 
 var LocationController = require("./app/controllers/location-controller");
 var locationController = new LocationController();
@@ -21,16 +21,16 @@ app.post('/location', locationController.updateLocation);
 app.get('/location/recent', locationController.getRecentEntries);
 app.delete('/location/:ids', locationController.deleteDocuments)
 
-console.log("Starting Mongo..");
+console.log("Starting Database..");
 
-databaseHelper.startMongo(appConfig.db, function (err, db) {
+databaseHelper.startDatabase(appConfig.db, function (err, db) {
   if (err) {
-    console.log("Error Starting Mongo..");
+    console.log("Error Starting/Connecting to Database..");
     console.log(err);
     console.log("Exiting...");
   } else {
     console.log("Successfully connected to Database... Starting Node...");
-    var port = process.env.PORT || appConfig.node.port;
+    var port = appConfig.node.port;
     app.listen(port);
     console.log(port);
   }

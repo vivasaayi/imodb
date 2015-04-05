@@ -46,7 +46,7 @@ namespace IModB.UI
                     .Append("\"DeviceName\":\"").Append(result.DeviceId.ToString()).Append("\",")
                     .Append("\"DeviceId\":\"").Append(result.DeviceId.ToString()).Append("\",")
                     .Append("\"TimeStamp\":\"").Append(result.TimeStamp).Append("\",")
-                    .Append("\"Distance\":\"").Append(result.Distance).Append("\",");
+                    .Append("\"Distance\":\"").Append(result.DistanceFromDevice).Append("\",");
                 sb.AppendLine();
             }
 
@@ -54,7 +54,7 @@ namespace IModB.UI
             richTextBox1.Text = sb.ToString();
             richTextBox2.Text = jsonToBePosted;
 
-            //new NetworkHelper().PostData(jsonToBePosted);
+            new NetworkHelper().PostData(jsonToBePosted);
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)

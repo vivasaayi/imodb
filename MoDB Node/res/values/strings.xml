@@ -15,5 +15,13 @@
     <string name="port">Port</string>
     <string name="Preference">Settings</string>
     <string name="accessPointName">Access Point Name</string>
+    <string name="lattitude">Lattitude</string>
+    <string name="longtitude">Longtitude</string>
+    <string name="markAsDeviceLocation">Mark As Device Location</string>
+    <string name="deviceLattitude">Device Lattitude:</string>
+    <string name="deviceLongtitude">Device Longtitude:</string>
+    <string name="distanceFromDevice">Distance From Device</string>
+    <string name="bearing">Bearing</string>
+    <string name="StartCalibrating">Start Calibrating</string>
 
 </resources>

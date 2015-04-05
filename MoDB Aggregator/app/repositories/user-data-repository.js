@@ -1,7 +1,11 @@
 "use strict";
 
-var database = require("dal");
+var database = require("./database-heler.js");
 var objectId = require("mongodb").ObjectID;
+
+module.exports.createDocuments = function(query, data, callback) {
+  database.createDocuments(query, data, callback);
+};
 
 module.exports.save = function (collectionName, document, callback) {
   console.log("Saving: " + collectionName);

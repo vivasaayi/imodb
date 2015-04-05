@@ -43,7 +43,7 @@ namespace IModB.UI.DomainModel
                     scanResult.SensorId = this.Id;
                     scanResult.DeviceId = device.getMac();
                     scanResult.TimeStamp = DateTime.Now;
-                    scanResult.Distance = distance;
+                    scanResult.DistanceFromDevice = distance;
                     _scanResult.Add(scanResult);
                 }
             }

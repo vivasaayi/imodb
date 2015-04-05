@@ -21,6 +21,10 @@ BaseService.prototype.saveDocument = function (collection, document, userId, cal
   userDataRepository.save(collection, document, _.partial(this.invokeCallBack, callback));
 };
 
+BaseService.prototype.createDocuments = function (query, data, callback) {
+  userDataRepository.createDocuments(query, data, callback);
+};
+
 BaseService.prototype.updateBaseFields = function (object, userId) {
   if (_.isEmpty(object.createdBy)) {
     object.createdBy = userId;

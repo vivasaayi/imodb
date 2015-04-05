@@ -28,6 +28,7 @@
     <Compile Include="app\config\index.js" />
     <Compile Include="app\controllers\base-controller.js" />
     <Compile Include="app\controllers\location-controller.js" />
+    <Compile Include="app\repositories\database-heler.js" />
     <Compile Include="app\repositories\user-data-repository.js" />
     <Compile Include="app\services\base-service.js" />
     <Compile Include="app\services\location-service.js" />

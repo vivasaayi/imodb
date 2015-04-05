@@ -11,13 +11,21 @@ namespace IModB.UI.DomainModel
     public class ScanResult
     {
         [DataMember]
-        public string SensorId {get;set;}
+        public string DeviceName { get; set; }
         [DataMember]
         public string DeviceId { get; set; }
         [DataMember]
-        public string DeviceName { get; set; }
+        public string SensorId {get;set;}
         [DataMember]
-        public double Distance { get; set; }
+        public double Rssi { get; set; }
+        [DataMember]
+        public double Lattitude { get; set; }
+        [DataMember]
+        public double Longtitude { get; set; }
+        [DataMember]
+        public double Bearing { get; set; }
+        [DataMember]
+        public double DistanceFromDevice { get; set; }
         [DataMember]
         public DateTime TimeStamp { get; set; }
 

@@ -107,5 +107,11 @@
       <orientation>VerticalLeft</orientation>
       <alignment>Center</alignment>
     </sensor>
+    <sensor>
+      <roomid>A</roomid>
+      <id>SA4</id>
+      <orientation>VerticalRight</orientation>
+      <alignment>Center</alignment>
+    </sensor>
   </sensors>
 </building>
