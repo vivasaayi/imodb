@@ -10,9 +10,11 @@ var databaseHelper = require("./app/repositories/database-heler");
 
 var LocationController = require("./app/controllers/location-controller");
 var SensorsController = require("./app/controllers/sensors-controller");
+var DevicesController = require("./app/controllers/devices-controller");
 
 var locationController = new LocationController();
 var sensorsController = new SensorsController();
+var devicesController = new DevicesController();
 
 app.use(bodyParser.json()); 
 
@@ -25,6 +27,8 @@ app.get('/location', locationController.getRecentEntries);
 
 app.get('/sensors', sensorsController.getAllSensors);
 app.get('/sensors/:id', sensorsController.getLocationUpdatesBySensor);
+
+app.get('/devices', devicesController.getAllDevices);
 
 console.log("Starting Database..");
 

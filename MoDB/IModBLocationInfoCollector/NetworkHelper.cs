@@ -200,6 +200,40 @@ namespace IModBLocationInfoCollector
                 bulkCopy.WriteToServer(table);
             }
         }
+
+        public JObject GetDataFromRemote(string path)
+        {
+            JObject returnData = new JObject();
+            try
+            {
+                var url = this.GetBaseUrl() + path;
+
+                //url = "http://localhost:4142/home/about";
+                Console.WriteLine("Fetching from:" + url);
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url); ;
+                request.Method = "GET";
+
+                var response = request.GetResponse();
+
+                List<LocationInfo> locationInfoList = new List<LocationInfo>();
+                Dictionary<string, string> docs = new Dictionary<string, string>();
+
+                Console.WriteLine("Response Received");
+                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                {
+                    var resultdata = sr.ReadToEnd();
+
+                    returnData = JObject.Parse(resultdata);                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error when getitng recent data..");
+                Console.WriteLine(ex.ToString());
+            }
+
+            return returnData;
+        }
     }
 
     public class LocationInfo

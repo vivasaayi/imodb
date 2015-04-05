@@ -31,38 +31,36 @@
             this.scanDevicesButton = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.sensorViewTabPage = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.fetchDataButton = new System.Windows.Forms.Button();
+            this.deviceViewTabPage = new System.Windows.Forms.TabPage();
+            this.devicesListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.loadRoomsButton = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.realTimeTrackerButton = new System.Windows.Forms.Button();
             this.trackMeButton = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.devicesListBox = new System.Windows.Forms.ListBox();
             this.buildingUserControl = new IModB.UI.BuildingUserControl();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.sensorViewTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.deviceViewTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // scanDevicesButton
             // 
-            this.scanDevicesButton.Location = new System.Drawing.Point(169, 38);
+            this.scanDevicesButton.Location = new System.Drawing.Point(88, 38);
             this.scanDevicesButton.Name = "scanDevicesButton";
             this.scanDevicesButton.Size = new System.Drawing.Size(112, 23);
             this.scanDevicesButton.TabIndex = 1;
@@ -84,26 +82,26 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.sensorViewTabPage);
+            this.tabControl1.Controls.Add(this.deviceViewTabPage);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(3, 70);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(551, 346);
             this.tabControl1.TabIndex = 5;
             // 
-            // tabPage1
+            // sensorViewTabPage
             // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(543, 320);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Result";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.sensorViewTabPage.Controls.Add(this.dataGridView1);
+            this.sensorViewTabPage.Location = new System.Drawing.Point(4, 22);
+            this.sensorViewTabPage.Name = "sensorViewTabPage";
+            this.sensorViewTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.sensorViewTabPage.Size = new System.Drawing.Size(543, 320);
+            this.sensorViewTabPage.TabIndex = 0;
+            this.sensorViewTabPage.Text = "Sensor\'s View";
+            this.sensorViewTabPage.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -149,15 +147,25 @@
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             // 
-            // fetchDataButton
+            // deviceViewTabPage
             // 
-            this.fetchDataButton.Location = new System.Drawing.Point(285, 38);
-            this.fetchDataButton.Name = "fetchDataButton";
-            this.fetchDataButton.Size = new System.Drawing.Size(112, 23);
-            this.fetchDataButton.TabIndex = 6;
-            this.fetchDataButton.Text = "Fetch Latest Data";
-            this.fetchDataButton.UseVisualStyleBackColor = true;
-            this.fetchDataButton.Click += new System.EventHandler(this.fetchDataButton_Click);
+            this.deviceViewTabPage.Controls.Add(this.devicesListBox);
+            this.deviceViewTabPage.Location = new System.Drawing.Point(4, 22);
+            this.deviceViewTabPage.Name = "deviceViewTabPage";
+            this.deviceViewTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.deviceViewTabPage.Size = new System.Drawing.Size(543, 320);
+            this.deviceViewTabPage.TabIndex = 3;
+            this.deviceViewTabPage.Text = "Device\'s View";
+            this.deviceViewTabPage.UseVisualStyleBackColor = true;
+            // 
+            // devicesListBox
+            // 
+            this.devicesListBox.FormattingEnabled = true;
+            this.devicesListBox.Location = new System.Drawing.Point(6, 6);
+            this.devicesListBox.Name = "devicesListBox";
+            this.devicesListBox.Size = new System.Drawing.Size(248, 303);
+            this.devicesListBox.TabIndex = 0;
+            this.devicesListBox.SelectedIndexChanged += new System.EventHandler(this.devicesListBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -215,7 +223,6 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.realTimeTrackerButton);
             this.splitContainer1.Panel2.Controls.Add(this.trackMeButton);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.loadRoomsButton);
@@ -223,51 +230,20 @@
             this.splitContainer1.Panel2.Controls.Add(this.textBox2);
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.fetchDataButton);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new System.Drawing.Size(1191, 428);
             this.splitContainer1.SplitterDistance = 621;
             this.splitContainer1.TabIndex = 12;
             // 
-            // realTimeTrackerButton
-            // 
-            this.realTimeTrackerButton.Location = new System.Drawing.Point(403, 38);
-            this.realTimeTrackerButton.Name = "realTimeTrackerButton";
-            this.realTimeTrackerButton.Size = new System.Drawing.Size(75, 23);
-            this.realTimeTrackerButton.TabIndex = 13;
-            this.realTimeTrackerButton.Text = "Real Time";
-            this.realTimeTrackerButton.UseVisualStyleBackColor = true;
-            this.realTimeTrackerButton.Click += new System.EventHandler(this.realTimeTrackerButton_Click);
-            // 
             // trackMeButton
             // 
-            this.trackMeButton.Location = new System.Drawing.Point(88, 38);
+            this.trackMeButton.Location = new System.Drawing.Point(206, 38);
             this.trackMeButton.Name = "trackMeButton";
             this.trackMeButton.Size = new System.Drawing.Size(75, 23);
             this.trackMeButton.TabIndex = 12;
-            this.trackMeButton.Text = "Track Me";
+            this.trackMeButton.Text = "Track Device";
             this.trackMeButton.UseVisualStyleBackColor = true;
             this.trackMeButton.Click += new System.EventHandler(this.trackMeButton_Click);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.devicesListBox);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(543, 320);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Devices";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // devicesListBox
-            // 
-            this.devicesListBox.FormattingEnabled = true;
-            this.devicesListBox.Location = new System.Drawing.Point(6, 6);
-            this.devicesListBox.Name = "devicesListBox";
-            this.devicesListBox.Size = new System.Drawing.Size(248, 303);
-            this.devicesListBox.TabIndex = 0;
-            this.devicesListBox.SelectedIndexChanged += new System.EventHandler(this.devicesListBox_SelectedIndexChanged);
             // 
             // buildingUserControl
             // 
@@ -291,16 +267,16 @@
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.sensorViewTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.deviceViewTabPage.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -311,12 +287,11 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private BuildingUserControl buildingUserControl;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage sensorViewTabPage;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Button fetchDataButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
@@ -324,8 +299,7 @@
         private System.Windows.Forms.Button loadRoomsButton;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button trackMeButton;
-        private System.Windows.Forms.Button realTimeTrackerButton;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage deviceViewTabPage;
         private System.Windows.Forms.ListBox devicesListBox;
     }
 }

@@ -62,7 +62,7 @@ namespace IModB.UI
             if (dataGridView1.SelectedRows.Count == 0) return;
 
             DataGridViewRow row = dataGridView1.SelectedRows[0];
-            var readerId = row.Cells[0].Value.ToString();
+            var readerId = row.Cells[2].Value.ToString();
             var deviceId = row.Cells[1].Value.ToString();
 
 
