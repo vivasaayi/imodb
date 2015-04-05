@@ -264,7 +264,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form1";
+            this.Text = "IMoDB Simulator";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tabControl1.ResumeLayout(false);
             this.sensorViewTabPage.ResumeLayout(false);

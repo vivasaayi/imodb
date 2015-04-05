@@ -16,6 +16,12 @@
         android:text="@string/StartCallibrator" />
 
     <Button
+        android:id="@+id/viewCallibrationResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Callibration Results" />
+
+    <Button
         android:id="@+id/trackMe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

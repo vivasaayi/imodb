@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +20,9 @@ public class PreferenceEditorActivity extends Activity implements OnClickListene
 	EditText urlEditView;
 	EditText portEditView;
 	EditText accessPointNameEditView;
+	
+	CheckBox isTestModeCheckBox;
+	
 	SharedPreferences sharedpreferences;
 
 	@Override
@@ -32,11 +36,13 @@ public class PreferenceEditorActivity extends Activity implements OnClickListene
 		urlEditView = (EditText) findViewById(R.id.url);
 		portEditView = (EditText) findViewById(R.id.port);
 		accessPointNameEditView = (EditText) findViewById(R.id.accessPointNameTextView);
+		isTestModeCheckBox = (CheckBox) findViewById(R.id.isTestMode);
 
 		sharedpreferences = getSharedPreferences("MODB", Context.MODE_PRIVATE);
 		urlEditView.setText(sharedpreferences.getString("URL", ""));
 		portEditView.setText(sharedpreferences.getString("Port", ""));
 		accessPointNameEditView.setText(sharedpreferences.getString("APN", ""));
+		isTestModeCheckBox.setChecked(sharedpreferences.getBoolean("TESTMODE", false));
 	}
 
 	@Override
@@ -53,6 +59,7 @@ public class PreferenceEditorActivity extends Activity implements OnClickListene
 			editor.putString("URL", urlEditView.getText().toString());
 			editor.putString("Port", portEditView.getText().toString());
 			editor.putString("APN", accessPointNameEditView.getText().toString());
+			editor.putBoolean("TESTMODE", isTestModeCheckBox.isChecked());
 
 			editor.commit();
 			

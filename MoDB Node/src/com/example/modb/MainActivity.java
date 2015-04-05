@@ -17,6 +17,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	Button callibrateButton;
 	Button trackMeButton;
 	Button settingsButton;
+	Button viewCallibrationResultButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +28,13 @@ public class MainActivity extends Activity implements OnClickListener {
 		callibrateButton = (Button) findViewById(R.id.callibrate);
 		trackMeButton = (Button) findViewById(R.id.trackMe);
 		settingsButton = (Button) findViewById(R.id.settingsButton);
+		viewCallibrationResultButton = (Button) findViewById(R.id.viewCallibrationResults);
 
 		startAPButton.setOnClickListener(this);
 		callibrateButton.setOnClickListener(this);
 		trackMeButton.setOnClickListener(this);
 		settingsButton.setOnClickListener(this);
+		viewCallibrationResultButton.setOnClickListener(this);
 
 		SharedPreferences sharedpreferences = getSharedPreferences("MODB", Context.MODE_PRIVATE);
 
@@ -41,7 +44,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			editor.putString("URL", "http://127.0.0.1");
 			editor.putString("Port", "4040");
 			editor.putString("APN", "Please set the APN");
-
+			editor.putBoolean("TESTMODE", false);
+			
 			editor.commit();
 		}
 	}
@@ -66,6 +70,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 		} else if (view == settingsButton) {
 			Intent intent = new Intent(MainActivity.this, PreferenceEditorActivity.class);
+			startActivity(intent);
+		} else if(view == viewCallibrationResultButton){
+			Intent intent = new Intent(MainActivity.this, CallibrationResultActivity.class);
 			startActivity(intent);
 		}
 	}

@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -40,13 +41,18 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class BlueToothCoreActivity extends Activity implements OnClickListener{
+public class BlueToothCoreActivity extends Activity implements OnClickListener {
 	BluetoothAdapter blueToothAdapter;
 	Set<BlueToothDevice> scannedDevices = new HashSet<BlueToothDevice>();
 	Button startScanButton;
 	Button addDeviceButton;
 	Button postResultsButton;
-	
+
+	ArrayAdapter<String> devicesAdapter;
+
+	boolean autoScan = true;
+	boolean enableTableDisplay = true;
+
 	Location deviceLocation;
 	Location previousLocation;
 	float previousDistanceToDevice;
@@ -55,36 +61,30 @@ public class BlueToothCoreActivity extends Activity implements OnClickListener{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
+		devicesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
 	}
-	
-	public void initializeView(){
+
+	void setAutoScan(boolean value) {
+		autoScan = value;
+	}
+
+	void enableTableDisplay(boolean value) {
+		enableTableDisplay = value;
+	}
+
+	public void initializeView() {
 		IntentFilter actionFoundFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 		this.registerReceiver(mReceiver, actionFoundFilter);
 
 		IntentFilter discoveryFinishedIntend = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-		this.registerReceiver(mReceiver, discoveryFinishedIntend);		
+		this.registerReceiver(mReceiver, discoveryFinishedIntend);
 	}
 
 	public void onClick(View view) {
 		try {
-			if (view == startScanButton) {				
-				blueToothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-				if (blueToothAdapter == null) {
-					Log.d("debug", "No bluetooth available.");
-				} else {
-					Log.d("debug", "Bluetooth available. Success!");
-
-					if (!blueToothAdapter.isEnabled()) {
-						Log.d("debug", "Not enabled. Requesting to start.");
-						Intent enableBlueToothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-						startActivityForResult(enableBlueToothIntent, 1);
-					} else {
-						Log.d("debug", "Bluetooth Enabled.");
-					}
-					Toast.makeText(this, "Starting Discovery...", Toast.LENGTH_LONG).show();
-					blueToothAdapter.startDiscovery();
-				}
+			if (view == startScanButton) {
+				startBluetoothDeviceDiscovery();
 			} else if (view == addDeviceButton) {
 				String deviceName = ((EditText) findViewById(R.id.deviceNameTextView)).getText().toString();
 				String deviceMac = ((EditText) findViewById(R.id.macAddressTextView)).getText().toString();
@@ -95,6 +95,27 @@ public class BlueToothCoreActivity extends Activity implements OnClickListener{
 			}
 		} catch (Exception e) {
 			Toast.makeText(this, e.getMessage() + e.getStackTrace(), Toast.LENGTH_LONG).show();
+		}
+	}
+
+	void startBluetoothDeviceDiscovery() {
+		blueToothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+		if (blueToothAdapter == null) {
+			Log.d("debug", "No bluetooth available.");
+		} else {
+			Log.d("debug", "Bluetooth available. Success!");
+
+			if (!blueToothAdapter.isEnabled()) {
+				Log.d("debug", "Not enabled. Requesting to start.");
+				Intent enableBlueToothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+				startActivityForResult(enableBlueToothIntent, 1);
+			} else {
+				Log.d("debug", "Bluetooth Enabled.");
+			}
+			Toast.makeText(this, "Starting Discovery...", Toast.LENGTH_LONG).show();
+			blueToothAdapter.startDiscovery();
+			BlueToothCoreActivity.this.setProgressBarIndeterminateVisibility(true);
 		}
 	}
 
@@ -110,44 +131,55 @@ public class BlueToothCoreActivity extends Activity implements OnClickListener{
 		device.MacAddress = address;
 		device.Date = Utils.GetDate();
 		device.Rssi = rssi;
-		
-		if(deviceLocation != null){
+
+		if (devicesAdapter.getPosition(name + " ==> " + address) < 0) {
+			devicesAdapter.add(name + " ==> " + address);
+			devicesAdapter.notifyDataSetChanged();
+		}
+
+		if (deviceLocation != null) {
 			device.DistanceFromDevice = previousDistanceToDevice + "";
 			device.Lattitude = previousLocation.getLatitude() + "";
 			device.Longtitude = previousLocation.getLongitude() + "";
 		}
 
-		scannedDevices.add(device);
+		scannedDevices.add(device);		
 
-		TableLayout tl = (TableLayout) this.findViewById(R.id.bluetoothDevicesTable);
+		if (enableTableDisplay) {
+			TableLayout tl = (TableLayout) this.findViewById(R.id.bluetoothDevicesTable);
 
-		TableRow tr = new TableRow(this);
-		tr.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			TableRow tr = new TableRow(this);
+			tr.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-		TextView timeTextView = new TextView(this);
-		timeTextView.setText(device.Date);
-		tr.addView(timeTextView);
+			//TextView timeTextView = new TextView(this);
+			//timeTextView.setText(device.Date);
+			//tr.addView(timeTextView);
 
-		TextView deviceNameTextView = new TextView(this);
-		deviceNameTextView.setText(device.Name);
-		tr.addView(deviceNameTextView);
+			TextView deviceNameTextView = new TextView(this);
+			deviceNameTextView.setText(device.Name);
+			tr.addView(deviceNameTextView);
 
-		TextView macAddressTextView = new TextView(this);
-		macAddressTextView.setText(device.MacAddress);
-		tr.addView(macAddressTextView);
+			TextView macAddressTextView = new TextView(this);
+			macAddressTextView.setText(device.MacAddress);
+			tr.addView(macAddressTextView);
 
-		TextView rssiTextView = new TextView(this);
-		rssiTextView.setText(device.Rssi + "");
-		tr.addView(rssiTextView);
+			TextView rssiTextView = new TextView(this);
+			rssiTextView.setText(device.Rssi + "");
+			tr.addView(rssiTextView);
 
-		tl.addView(tr, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			tl.addView(tr, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		}
+	}
+	
+	void processScannedResult(){
+		
 	}
 
 	private void updateDeviceDetailsToRemoteServer() {
 		try {
 			StringBuffer buffer = new StringBuffer();
 			SharedPreferences sharedpreferences = getSharedPreferences("MODB", Context.MODE_PRIVATE);
-			
+
 			buffer.append("[");
 
 			for (BlueToothDevice device : scannedDevices) {
@@ -160,18 +192,18 @@ public class BlueToothCoreActivity extends Activity implements OnClickListener{
 				child.accumulate("Lattitude", device.Lattitude);
 				child.accumulate("Longtitude", device.Longtitude);
 				child.accumulate("DistanceFromDevice", device.DistanceFromDevice);
-				
+
 				buffer.append(child.toString()).append(",");
 			}
 
-			buffer.deleteCharAt(buffer.length()-1);
+			buffer.deleteCharAt(buffer.length() - 1);
 			buffer.append("]");
-			
+
 			String urlSetting = sharedpreferences.getString("URL", "");
 			String portSetting = sharedpreferences.getString("Port", "");
-			String url =  urlSetting + ":" + portSetting + "/location";
+			String url = urlSetting + ":" + portSetting + "/location";
 			Toast.makeText(this, "Posting Scan Results to: " + url, Toast.LENGTH_LONG).show();
-			
+
 			new HttpPostTask().execute(url, buffer.toString());
 			scannedDevices.clear();
 			TableLayout tl = (TableLayout) this.findViewById(R.id.bluetoothDevicesTable);
@@ -197,15 +229,24 @@ public class BlueToothCoreActivity extends Activity implements OnClickListener{
 
 			} else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
 				Log.d("debug", "Scan Finished");
-				updateDeviceDetailsToRemoteServer();
-				Toast.makeText(BlueToothCoreActivity.this, "Starting Discovery...", Toast.LENGTH_LONG).show();
-				blueToothAdapter.startDiscovery();
+				Toast.makeText(BlueToothCoreActivity.this, "Discovery Completed...", Toast.LENGTH_LONG).show();
+				BlueToothCoreActivity.this.setProgressBarIndeterminateVisibility(false);
+				if(enableTableDisplay){
+					updateDeviceDetailsToRemoteServer();
+				} else {
+					processScannedResult();
+				}
+				
+				if (autoScan) {		
+					blueToothAdapter.startDiscovery();
+					BlueToothCoreActivity.this.setProgressBarIndeterminateVisibility(true);
+					Toast.makeText(BlueToothCoreActivity.this, "Starting Discovery...", Toast.LENGTH_LONG).show();
+				} 
 			} else {
 				Log.d("Sp,e other intend recieved", "Scan Finished");
 			}
 		}
 	};
-	
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -237,7 +278,7 @@ public class BlueToothCoreActivity extends Activity implements OnClickListener{
 			Log.d("debug", "No Paired Devices");
 		}
 	}
-	
+
 	private class HttpPostTask extends AsyncTask<String, Void, String> {
 
 		@Override
@@ -249,10 +290,10 @@ public class BlueToothCoreActivity extends Activity implements OnClickListener{
 				HttpClient httpClient = new DefaultHttpClient();
 				HttpPost request = new HttpPost();
 				request.setURI(new URI(info[0]));
-				
-				StringEntity se = new StringEntity(info[1]);				 
+
+				StringEntity se = new StringEntity(info[1]);
 				request.setEntity(se);
-				
+
 				request.setHeader("Content-type", "application/json");
 				HttpResponse response = httpClient.execute(request);
 
@@ -269,7 +310,8 @@ public class BlueToothCoreActivity extends Activity implements OnClickListener{
 
 			} catch (Exception e) {
 				result = e.getMessage() + "-" + e.getStackTrace();
-				//Toast.makeText(BlueToothAPActivity.this, result, Toast.LENGTH_LONG).show();
+				// Toast.makeText(BlueToothAPActivity.this, result,
+				// Toast.LENGTH_LONG).show();
 			}
 
 			return result;

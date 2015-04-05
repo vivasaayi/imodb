@@ -34,6 +34,7 @@
         <activity android:name="BlueToothCallibratorActivity"></activity>
         <activity android:name="BlueToothTrackerActivity"></activity>
         <activity android:name="PreferenceEditorActivity"></activity>
+        <activity android:name="CallibrationResultActivity"></activity>
     </application>
 
 </manifest>

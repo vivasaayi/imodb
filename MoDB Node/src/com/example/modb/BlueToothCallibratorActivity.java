@@ -1,7 +1,11 @@
 package com.example.modb;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -11,74 +15,84 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BlueToothCallibratorActivity extends BlueToothCoreActivity {
-	LocationManager locationManager;
-	LocationListener locationListener;
+	Button scanDevicesButton, startNearByCallibrationButton, startFartherCallbrationButton, finalizeCallibrationButton;
+	Spinner devicesSpinner;
 
-	EditText lattitudeEditText;
-	EditText longtitudeEditText;
-	EditText bearingEditText;
-	Button markAsDeviceLocationButton;
-	TextView deviceLattitudeTextView, deviceLongtitudeTextView, distanceFromDeviceTextView;
-
+	String selectedDevice;
+	int totalResults = 0;
+	
+	TextView textViewToUpdate;
+	float[] nearByRssi = new float[5];
+	float[] distanceRssi = new float[5];
+	boolean isCallibratingNearbyRssi;
+	
+	ProgressBar nearByCallibrationProgressBar;
+	ProgressBar distanCallibrationProgressBar;
+	
+	TextView calculatedAAndNForDeviceTextView;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.callibrator);
 		
-		initializeView();
-
-		lattitudeEditText = (EditText) findViewById(R.id.lattitudeEditText);
-		longtitudeEditText = (EditText) findViewById(R.id.longtitudeEditText);
-		bearingEditText = (EditText) findViewById(R.id.bearingEditText);
+		scanDevicesButton = (Button) findViewById(R.id.scanDevicesButton);
+		startNearByCallibrationButton = (Button) findViewById(R.id.startCallibrationNearbyButton);
+		startFartherCallbrationButton = (Button) findViewById(R.id.startDistanceCallibration);
+		finalizeCallibrationButton = (Button) findViewById(R.id.viewCallibrationResults);
 		
-		startScanButton = (Button) findViewById(R.id.startCallibratingButton);
-		markAsDeviceLocationButton = (Button) findViewById(R.id.markAsDeviceLocation);
-		deviceLattitudeTextView = (TextView) findViewById(R.id.deviceLatttudeTextView);
-		deviceLongtitudeTextView = (TextView) findViewById(R.id.deviceLongitudeTextView);
-		distanceFromDeviceTextView = (TextView) findViewById(R.id.distanceFromDeviceTextView);
+		calculatedAAndNForDeviceTextView = (TextView) findViewById(R.id.calculatedNAndAForDevice);
 		
-		markAsDeviceLocationButton.setOnClickListener(this);
-		startScanButton.setOnClickListener(this);
-
-		// Acquire a reference to the system Location Manager
-		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-		// Define a listener that responds to location updates
-		locationListener = new LocationListener() {
-			public void onLocationChanged(Location location) {
-				// Called when a new location is found by the network location
-				// provider.
-				lattitudeEditText.setText(location.getLatitude() + "");
-				longtitudeEditText.setText(location.getLongitude() + "");
-				previousLocation = location;
-				
-				if(deviceLocation !=null ){
-					previousDistanceToDevice = location.distanceTo(deviceLocation);
-					distanceFromDeviceTextView.setText(previousDistanceToDevice + "");
-					bearingEditText.setText(location.bearingTo(deviceLocation) + "");
+		devicesSpinner = (Spinner) findViewById(R.id.devicesSpinner);
+		
+		nearByCallibrationProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+		distanCallibrationProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
+		
+		initializeView();	
+		
+		setAutoScan(false);
+		enableTableDisplay(false);
+		
+		scanDevicesButton.setOnClickListener(this);
+		startNearByCallibrationButton.setOnClickListener(this);
+		startFartherCallbrationButton.setOnClickListener(this);
+		finalizeCallibrationButton.setOnClickListener(this);
+		
+		devicesSpinner.setAdapter(devicesAdapter);
+	}
+	
+	void processScannedResult(){
+		for (BlueToothDevice device : scannedDevices) {
+			String deviceName = (device.Name + " ==> " + device.MacAddress);
+			if(deviceName.equalsIgnoreCase(selectedDevice)){
+				TextView textView;
+				if(isCallibratingNearbyRssi){
+					textView = (TextView) findViewById(R.id.nearByRssi);		
+					nearByRssi[totalResults] = device.Rssi;
+					nearByCallibrationProgressBar.setProgress((totalResults +1) * 20);
+				} else {
+					textView = (TextView) findViewById(R.id.fartherRssi);	
+					distanceRssi[totalResults] = device.Rssi;
+					distanCallibrationProgressBar.setProgress((totalResults +1) * 20);
 				}
+				String text = textView.getText().toString() + "," + device.Rssi;
+				textView.setText(text);
+				totalResults += 1;				
 			}
-
-			public void onStatusChanged(String provider, int status, Bundle extras) {
-			}
-
-			public void onProviderEnabled(String provider) {
-			}
-
-			public void onProviderDisabled(String provider) {
-			}
-		};
-		
-		if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-			locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10, 0, locationListener);
-		} 
-		
-		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 0, locationListener);
 		}
+		
+		if(totalResults == 5){
+			setAutoScan(false);
+			totalResults = 0;
+		}
+		
+		scannedDevices.clear();
 	}
 
 	@Override
@@ -90,11 +104,57 @@ public class BlueToothCallibratorActivity extends BlueToothCoreActivity {
 
 	@Override
 	public void onClick(View view) {
-		if (view == markAsDeviceLocationButton) {
-			deviceLocation = previousLocation;
+		isCallibratingNearbyRssi = false;
+		if(view == scanDevicesButton){
+			startBluetoothDeviceDiscovery();
+		} else if (view == startNearByCallibrationButton){
+			nearByCallibrationProgressBar.setProgress(0);
+			scannedDevices.clear();
+			isCallibratingNearbyRssi = true;
+			selectedDevice = devicesSpinner.getSelectedItem().toString();
+			setAutoScan(true);
+			startBluetoothDeviceDiscovery();
+		} else if(view == startFartherCallbrationButton){
+			distanCallibrationProgressBar.setProgress(0);
+			scannedDevices.clear();
+			isCallibratingNearbyRssi =false;
+			selectedDevice = devicesSpinner.getSelectedItem().toString();
+			setAutoScan(true);
+			startBluetoothDeviceDiscovery();
+		} else if(view == finalizeCallibrationButton){
+			EditText callibrationDistanceEditText = (EditText) findViewById(R.id.callibrationDistanceInMeters);
 			
-			deviceLattitudeTextView.setText("Device Lattitude:" +  deviceLocation.getLatitude() + "");
-			deviceLongtitudeTextView.setText("Device Longtitude:" + deviceLocation.getLongitude() + "");
+			if(callibrationDistanceEditText.getText().toString().length() <=0 ){
+				Toast.makeText(this, "Please enter the distance.", Toast.LENGTH_LONG).show();
+				return;
+			}
+			
+			float nearBySum =0;
+			float farthestSum =0;
+			
+			for(int i=0;i<5;i++){
+				nearBySum += nearByRssi[i];
+				farthestSum += distanceRssi[i];
+			}
+			
+			double nearbyAvg = Math.abs(nearBySum/5);
+			double farthestAvg = Math.abs(farthestSum/5);
+			
+			
+			double callibrationDistance  = Float.parseFloat(callibrationDistanceEditText.getText().toString());
+			
+			double n = (farthestAvg - nearbyAvg)/(10 * Math.log10(callibrationDistance));
+			
+			calculatedAAndNForDeviceTextView.setText("A:" + nearbyAvg + "    N:" + n);
+			
+			SharedPreferences sharedpreferences = getSharedPreferences("MODB", Context.MODE_PRIVATE);
+			
+			Editor editor = sharedpreferences.edit();
+			editor.putFloat(selectedDevice + "-A", (float)nearbyAvg);
+			editor.putFloat(selectedDevice + "-N", (float)n);
+			editor.commit();
+			
+			Toast.makeText(this, "Device Callibrated Successfully", Toast.LENGTH_LONG).show();
 		}
 	}
 

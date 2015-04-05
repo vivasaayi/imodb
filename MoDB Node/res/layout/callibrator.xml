@@ -4,77 +4,97 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
+    <Button
+        android:id="@+id/scanDevicesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/scanDevices" />
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lattitude"
+        android:text="@string/SelectBTDevice"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
-        android:id="@+id/lattitudeEditText"
+    <Spinner
+        android:id="@+id/devicesSpinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" />
 
-        <requestFocus />
-    </EditText>
+    <Button
+        android:id="@+id/startCallibrationNearbyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/StartNearbyCallibration" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/nearByRssi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/longtitude"
+        android:text="Enter the Distance (in meters Ex. 3.2)"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
-        android:id="@+id/longtitudeEditText"
+        android:id="@+id/callibrationDistanceInMeters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/startDistanceCallibration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/StartDistanceCallibration" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/fartherRssi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/bearing"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <EditText
-        android:id="@+id/bearingEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/distanceFromDeviceTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/distanceFromDevice"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/markAsDeviceLocation"
+        android:id="@+id/viewCallibrationResults"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/markAsDeviceLocation" />
+        android:text="@string/finalize" />
 
-    <Button
-        android:id="@+id/startCallibratingButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/StartCalibrating" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/deviceLatttudeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/deviceLattitude"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:id="@+id/calculatedNAndAForDevice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/deviceLongitudeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/deviceLongtitude"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
 
 </LinearLayout>

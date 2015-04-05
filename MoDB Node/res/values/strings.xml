@@ -23,5 +23,10 @@
     <string name="distanceFromDevice">Distance From Device</string>
     <string name="bearing">Bearing</string>
     <string name="StartCalibrating">Start Calibrating</string>
+    <string name="SelectBTDevice">Select Bluetooth Device</string>
+    <string name="scanDevices">Scan Devices</string>
+    <string name="StartNearbyCallibration">Start NEarby Callibration</string>
+    <string name="StartDistanceCallibration">Start Distance Callibration</string>
+    <string name="finalize">Finalize Callibration</string>
 
 </resources>

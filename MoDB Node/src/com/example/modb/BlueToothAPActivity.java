@@ -34,6 +34,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -54,5 +55,12 @@ public class BlueToothAPActivity extends BlueToothCoreActivity {
 		startScanButton.setOnClickListener(this);
 		addDeviceButton.setOnClickListener(this);
 		postResultsButton.setOnClickListener(this);
+		
+		SharedPreferences sharedpreferences = getSharedPreferences("MODB", Context.MODE_PRIVATE);
+		
+		if(!sharedpreferences.getBoolean("TESTMODE", false)){
+			LinearLayout testLayout = (LinearLayout) findViewById(R.id.testModeLayout);
+			testLayout.setVisibility(View.GONE);
+		}
 	}
 }
