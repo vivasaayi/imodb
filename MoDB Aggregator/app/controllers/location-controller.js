@@ -27,7 +27,10 @@ LocationController.prototype.updateLocation = function (req, res) {
 };
 
 LocationController.prototype.getRecentEntries = function (req, res) {
-  locationService.getRecentEntries(function (err, result) {
+  var limit = req.query.limit || 20;
+  var index = req.query.index || 0;
+  
+  locationService.getRecentEntries(index, limit, function (err, result) {
     if (err) {
       res.send({ error: "error", message: err });
     } else {

@@ -21,6 +21,10 @@ module.exports.save = function (collectionName, document, callback) {
   }
 };
 
+module.exports.executeSelectQuery = function (query, callback) {
+  database.executeSelectQuery(query, callback);
+};
+
 
 module.exports.loadWithLimit = function (collectionName, limit, callback) {
   console.log("Loading " + collectionName);

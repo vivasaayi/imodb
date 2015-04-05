@@ -28,9 +28,13 @@ LocationService.prototype.updateLocation = function (locationInfo, callback) {
   this.createDocuments(query, data, callback);
 };
 
-LocationService.prototype.getRecentEntries = function (callback) {
-  this.getRecentFromCollection("location", callback);
+LocationService.prototype.getRecentEntries = function (index, limit, callback) {
+  var query = 'SELECT * FROM "LocationUpdate" ' + 
+    ' Where itemindex >=  ' + index +
+  ' ORDER BY itemindex ASC LIMIT ' + limit + ';';
+  this.executeSelectQuery(query, callback);
 };
+
 
 LocationService.prototype.deleteLocationDocuments = function (ids, callback) {
   this.deleteDocuments("location", ids, callback)

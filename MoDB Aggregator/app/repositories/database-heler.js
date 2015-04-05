@@ -38,6 +38,25 @@ var createDocument = function (query, data, callback) {
   });
 };
 
+module.exports.executeSelectQuery = function (query, callback) {
+  pg.connect(connectionString, function (err, client, done) {
+    if (err) {
+      done(client);
+      callback(err, null);
+    } else {
+      client.query(query, function (err, result) {
+        if (err) {
+          done(client);
+          callback(err, null);
+        } else {
+          done();
+          callback(null, result.rows);
+        }
+      });
+    }
+  });
+};
+
 module.exports.createDocuments = function (query, data, completedCallback) {
   var createFunction = function (currentRecord, iteratorCallback) {
     console.log("Creating document:" + currentRecord[0]);

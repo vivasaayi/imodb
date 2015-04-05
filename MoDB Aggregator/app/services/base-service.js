@@ -42,6 +42,10 @@ BaseService.prototype.deleteDocument = function (collection, document, callback)
   userDataRepository.delete(collection, document, callback);
 };
 
+BaseService.prototype.executeSelectQuery = function(query, callback) {
+  userDataRepository.executeSelectQuery(query, callback);
+};
+
 BaseService.prototype.deleteDocuments = function (collection, ids, completedCallback) {
   var deleteFunction = function (id, iteratorCallback) {
     console.log("Deleting document:" + id);

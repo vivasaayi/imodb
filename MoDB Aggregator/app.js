@@ -9,7 +9,10 @@ var bodyParser = require('body-parser');
 var databaseHelper = require("./app/repositories/database-heler");
 
 var LocationController = require("./app/controllers/location-controller");
+var SensorsController = require("./app/controllers/sensors-controller");
+
 var locationController = new LocationController();
+var sensorsController = new SensorsController();
 
 app.use(bodyParser.json()); 
 
@@ -18,8 +21,10 @@ app.get('/', function (req, res) {
 });
 
 app.post('/location', locationController.updateLocation);
-app.get('/location/recent', locationController.getRecentEntries);
-app.delete('/location/:ids', locationController.deleteDocuments)
+app.get('/location', locationController.getRecentEntries);
+
+app.get('/sensors', sensorsController.getAllSensors);
+app.get('/sensors/:id', sensorsController.getLocationUpdatesBySensor);
 
 console.log("Starting Database..");
 
