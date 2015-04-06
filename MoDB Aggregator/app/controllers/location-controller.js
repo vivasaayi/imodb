@@ -26,6 +26,36 @@ LocationController.prototype.updateLocation = function (req, res) {
   });
 };
 
+LocationController.prototype.getFilteredLocationUpdatesBySensor = function (req, res) {
+  var from = req.query.from;
+  var to = req.query.to;
+  var id = req.query.id;
+  
+  
+  locationService.getFilteredLocationUpdatesBySensor(id, from, to, function (err, result) {
+    if (err) {
+      res.send({ error: "error", message: err });
+    } else {
+      res.send({ status: "Success", result: result });
+    }
+  });
+};
+
+LocationController.prototype.getFilteredLocationUpdatesByDevice = function (req, res) {
+  var from = req.query.from;
+  var to = req.query.to;
+  var id = req.query.id;
+  
+  
+  locationService.getFilteredLocationUpdatesByDevice(id, from, to, function (err, result) {
+    if (err) {
+      res.send({ error: "error", message: err });
+    } else {
+      res.send({ status: "Success", result: result });
+    }
+  });
+};
+
 LocationController.prototype.getRecentEntries = function (req, res) {
   var limit = req.query.limit || 20;
   var index = req.query.index || 0;

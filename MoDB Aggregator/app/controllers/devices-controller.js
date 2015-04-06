@@ -23,4 +23,18 @@ DevicesController.prototype.getAllDevices = function (req, res) {
   });
 };
 
+DevicesController.prototype.getUpdatesWhichTagsDevice = function (req, res) {
+  var id = req.params.id;
+  
+  deviceService.getUpdatesWhichTagsDevice(id, function (err, result) {
+    if (err) {
+      res.send({ error: "error", message: err });
+    } else {
+      res.send({ status: "Success", result: result });
+    }
+  });
+};
+
+
+
 module.exports = DevicesController;

@@ -27,8 +27,11 @@ app.get('/location', locationController.getRecentEntries);
 
 app.get('/sensors', sensorsController.getAllSensors);
 app.get('/sensors/:id', sensorsController.getLocationUpdatesBySensor);
+app.get('/filtersensors', locationController.getFilteredLocationUpdatesBySensor);
 
 app.get('/devices', devicesController.getAllDevices);
+app.get('/devices/:id', devicesController.getUpdatesWhichTagsDevice);
+app.get('/filterdevices', locationController.getFilteredLocationUpdatesByDevice);
 
 console.log("Starting Database..");
 

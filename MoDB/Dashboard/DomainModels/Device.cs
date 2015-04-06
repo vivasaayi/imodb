@@ -10,5 +10,10 @@ namespace Dashboard.DomainModels
     {
         public string DeviceId { get; set; }
         public string DeviceName { get; set; }
+
+        public override string ToString()
+        {
+            return DeviceId + "-" + DeviceName;
+        }
     }
 }

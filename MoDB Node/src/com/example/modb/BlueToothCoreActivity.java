@@ -137,12 +137,6 @@ public class BlueToothCoreActivity extends Activity implements OnClickListener {
 			devicesAdapter.notifyDataSetChanged();
 		}
 
-		if (deviceLocation != null) {
-			device.DistanceFromDevice = previousDistanceToDevice + "";
-			device.Lattitude = previousLocation.getLatitude() + "";
-			device.Longtitude = previousLocation.getLongitude() + "";
-		}
-
 		scannedDevices.add(device);		
 
 		if (enableTableDisplay) {

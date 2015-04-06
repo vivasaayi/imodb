@@ -12,8 +12,8 @@ var LocationService = function () {
 util.inherits(LocationService, BaseService);
 
 LocationService.prototype.updateLocation = function (locationInfo, callback) {
-  var query = 'INSERT INTO "LocationUpdate" ("Id", "Name", "DeviceId" ,"Date", "SensorId", "Rssi", "Lattitude", "Longtitude", "Bearing", "DistanceFromDevice")' + 
-  'VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);';
+  var query = 'INSERT INTO "LocationUpdate" ("Id", "Name", "DeviceId" ,"Date", "SensorId", "Rssi")' + 
+  'VALUES($1, $2, $3, $4, $5, $6);';
   
   var data = [
     
@@ -21,7 +21,7 @@ LocationService.prototype.updateLocation = function (locationInfo, callback) {
   
   _.each(locationInfo, function (location) {
     data.push([
-      new ObjectId(), location.DeviceName, location.DeviceId, new Date(), location.SensorId, location.Rssi, location.Lattitude, location.Longtitude, location.Bearing, location.DistanceFromDevice
+      new ObjectId(), location.DeviceName, location.DeviceId, new Date(), location.SensorId, location.Rssi
     ]);
   });
   
@@ -32,6 +32,20 @@ LocationService.prototype.getRecentEntries = function (index, limit, callback) {
   var query = 'SELECT * FROM "LocationUpdate" ' + 
     ' Where itemindex >=  ' + index +
   ' ORDER BY itemindex ASC LIMIT ' + limit + ';';
+  this.executeSelectQuery(query, callback);
+};
+
+LocationService.prototype.getFilteredLocationUpdatesBySensor = function (id, from, to, callback) {
+  var query = 'SELECT * FROM "LocationUpdate" ' + 
+    ' Where "SensorId" =  \'' + id + '\'' + 
+  ' AND "Date" BETWEEN \'' + from + '\' AND \'' + to +"\';";
+  this.executeSelectQuery(query, callback);
+};
+
+LocationService.prototype.getFilteredLocationUpdatesByDevice = function (id, from, to, callback) {
+  var query = 'SELECT * FROM "LocationUpdate" ' + 
+    ' Where "DeviceId" =  \'' + id + '\'' + 
+  ' AND "Date" BETWEEN \'' + from + '\' AND \'' + to + "\';";
   this.executeSelectQuery(query, callback);
 };
 

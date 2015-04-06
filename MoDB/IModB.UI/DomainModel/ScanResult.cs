@@ -19,19 +19,13 @@ namespace IModB.UI.DomainModel
         [DataMember]
         public double Rssi { get; set; }
         [DataMember]
-        public double Lattitude { get; set; }
-        [DataMember]
-        public double Longtitude { get; set; }
-        [DataMember]
-        public double Bearing { get; set; }
-        [DataMember]
         public double DistanceFromDevice { get; set; }
         [DataMember]
         public DateTime TimeStamp { get; set; }
 
         public ScanResult()
         {
-            DeviceName = "DN";
+            DeviceName = "DN-" + DeviceId;
         }
     }
 }

@@ -47,7 +47,6 @@ namespace Dashboard
         {
             var allDevices = _allDevicesHelper.GetAllDevices();
             allDevicesListBox.DataSource = allDevices;
-            allDevicesListBox.DisplayMember = "DeviceName";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -63,6 +62,62 @@ namespace Dashboard
             {
                 IMoDBSettings.Port = port;
             }
+        }
+
+        Sensor selectedSensor;
+        private void allSensorsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (allSensorsListBox.SelectedItems.Count > 0 && allSensorsListBox.SelectedIndex >= 0)
+            {
+                selectedSensor = (Sensor)allSensorsListBox.SelectedItems[0];
+                var sensorId = selectedSensor.SensorId;
+                locationUpdatesBySensorsGridView.DataSource = _allSensorsHelper.LocationUpdatesBySensor(sensorId);
+            }
+        }
+
+        private void sensorStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void FilterSensorsBasedOnDate()
+        {
+            var fromDate = sensorStartDate.Value;
+            var endDate = sensorEndDate.Value;
+            locationUpdatesBySensorsGridView.DataSource = _allSensorsHelper.LocationUpdatesBySensor(selectedSensor.SensorId, fromDate, endDate);
+        }
+
+        private void FilterDevicesBasedOnDate()
+        {
+            var fromDate = deviceStartDate.Value;
+            var endDate = deviceEndDate.Value;
+            deviceTagDataGridView.DataSource = _allDevicesHelper.LocationUpdatesBySensor(selectedDevice.DeviceId, fromDate, endDate);
+        }
+
+        private void sensorEndDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void filterSensorsButton_Click(object sender, EventArgs e)
+        {
+            FilterSensorsBasedOnDate();
+        }
+
+        Device selectedDevice;
+        private void allDevicesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (allDevicesListBox.SelectedItems.Count > 0 && allDevicesListBox.SelectedIndex >= 0)
+            {
+                selectedDevice = (Device)allDevicesListBox.SelectedItems[0];
+                var deviceId = selectedDevice.DeviceId;
+                deviceTagDataGridView.DataSource = _allDevicesHelper.LocationUpdatesByDevice(deviceId);
+            }
+        }
+
+        private void filterDevicesButton_Click(object sender, EventArgs e)
+        {
+            FilterDevicesBasedOnDate();
         }
     }
 }

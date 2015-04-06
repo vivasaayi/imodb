@@ -23,4 +23,11 @@ DevicesService.prototype.getLocationUpdatesBySensor = function (id, callback) {
   this.executeSelectQuery(query, callback);
 };
 
+DevicesService.prototype.getUpdatesWhichTagsDevice = function (id, callback) {
+  var query = 'SELECT * FROM "LocationUpdate" ' + 
+    ' Where "DeviceId" =  \'' + id + '\'' + 
+  ' ORDER BY itemindex ASC LIMIT 500;';
+  this.executeSelectQuery(query, callback);
+};
+
 module.exports = DevicesService;

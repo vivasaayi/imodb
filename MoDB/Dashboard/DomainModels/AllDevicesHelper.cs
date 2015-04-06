@@ -27,5 +27,27 @@ namespace Dashboard.DomainModels
 
             return devices;
         }
+
+        internal List<LocationUpdate> LocationUpdatesByDevice(string deviceId)
+        {
+            var lus = new List<LocationUpdate>();
+
+            var data = GetDataFromRemote("devices/" + deviceId);
+
+            return ConvertToLocationUpdates(lus, data);
+        }
+
+        internal object LocationUpdatesBySensor(string deviceId, DateTime fromDate, DateTime endDate)
+        {
+            var lus = new List<LocationUpdate>();
+            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+
+            var fromTicks = fromDate.ToString("yyyy-MM-ddTHH:mm:ss");
+            var toTicks = endDate.ToString("yyyy-MM-ddTHH:mm:ss");
+
+            var data = GetDataFromRemote("filterdevices?id=" + deviceId + "&from=" + fromTicks + "&to=" + toTicks);
+
+            return ConvertToLocationUpdates(lus, data);
+        }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="DomainModels\AllDevicesHelper.cs" />
     <Compile Include="DomainModels\BaseHelper.cs" />
     <Compile Include="DomainModels\Device.cs" />
+    <Compile Include="DomainModels\LocationUpdate.cs" />
     <Compile Include="DomainModels\Sensor.cs" />
     <Compile Include="DomainModels\AllSensorsHelper.cs" />
     <Compile Include="Form1.cs">
